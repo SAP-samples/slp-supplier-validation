@@ -1,0 +1,353 @@
+<mvc:View
+	controllerName="com.sap.pgp.dev.SupplierControlApp.controller.SupplierRequest"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	height="100%">
+	<NavContainer id="navContainer">
+		<pages>
+			<f:DynamicPage
+				id="dynamicPage"
+				toggleHeaderOnTitleClick="true"
+				stickySubheaderProvider="SupplierWizard"
+				class="sapUiNoContentPadding"
+				showFooter="true">
+				<!-- DynamicPage Title -->
+				<f:title>
+					<f:DynamicPageTitle>
+						<f:heading>
+							<Title text="Supplier Request"/>
+						</f:heading>
+					</f:DynamicPageTitle>
+				</f:title>
+				<!-- DynamicPage Header -->
+				<f:content>
+					<Wizard id="SupplierWizard"
+					        class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+					        complete="completedHandler"
+					        height="auto"
+					        enableBranching="true">
+						<WizardStep
+							id="Step1"
+							nextStep="Step2"
+							title="Supplier Basic Information"
+							validated="false"
+							icon="sap-icon://customer-and-supplier">
+							
+							<form:SimpleForm
+								editable="true"
+								layout="ResponsiveGridLayout"
+								title=""
+								adjustLabelSpan="false"
+								columnsL="1"
+								columnsM="1"
+								singleContainerFullSize="false" >
+								<core:Title text="Supplier Info" />
+								<Label text="Supplier Name" required="true"/>
+								<Input id="suppliername" value="{/SupplierRequest/SupplierName}" liveChange=".onLiveChange" change=".triggerBackendCheckDuplicate" width="500px" />
+								<Label text="Supplier DBA Name" required="false"/>
+								<Input id="supplierdbaname" value="{/SupplierRequest/SDBAName}" width="500px"/>
+								<core:Title text="Supplier Address" />
+								<Label text="Address" required="true"/>
+								<Input id="supplierstaddr" value="{/SupplierRequest/SupplierStreet}" width="500px"/>
+								<Label text="City"/>
+								<Input id="city" value="{/SupplierRequest/SupplierCity}" width="200px"/>
+								<Label text="Region"/>
+								<Input id="region" value="{/SupplierRequest/SupplierRegion}" width="200px"/>
+								<Label text="Country" required="true"/>
+								<Select id="country" selectedKey="{/SupplierRequest/SupplierCountry}" width="500px">
+									<items>
+									    <core:Item text="USA" key="USA"/>
+										<core:Item text="England" key="England"/>
+										<core:Item text="Germany" key="Germany"/>
+										<core:Item text="India" key="India"/>
+										<core:Item text="China" key="China"/>
+										<core:Item text="Mexico" key="Mexico"/>
+										<core:Item text="Canada" key="Canada"/>
+										<core:Item text="France" key="France"/>
+										<core:Item text="Poland" key="Poland"/>
+									</items>
+								</Select>
+								<Label text="Zip Code" required="true"/>
+								<Input id="zipcode" liveChange=".onLiveChangeAddress" change=".triggerBackendCheckAddr"  value="{/SupplierRequest/SupplierPostalCode}" width="150px"/>
+								<Label text="Agree to Terms and Conditions" required="true"/>
+								<CheckBox id="agreeinfo" valueState="Error" select="completedStep1Handler"/>
+
+							</form:SimpleForm>
+						</WizardStep>
+						<WizardStep
+							id="Step2"
+							nextStep="Step3"
+							title="Supplier Contact Information"
+							icon="sap-icon://money-bills">
+
+							<form:SimpleForm
+								editable="true"
+								layout="ResponsiveGridLayout"
+								title=""
+								adjustLabelSpan="false"
+								columnsL="1"
+								columnsM="1"
+								singleContainerFullSize="false" >
+
+							<Label text="Contact First Name" required="true"/>
+							<Input id="cfname" value="{/SupplierRequest/PrimaryContactFirstName}" width="300px" />
+							<Label text="Contact Last Name" required="true"/>
+							<Input id="clname" value="{/SupplierRequest/PrimaryContactLastName}" width="300px" />
+							<Label text="Contact Phone"/>
+							<Input id="cphone" value="{/SupplierRequest/PrimaryContactNo}"  width="100px" />
+							<Label text="Contact E-Mail" required="true"/>
+							<Input id="cemail" value="{/SupplierRequest/PrimaryContactEMail}" width="200px"/>
+							</form:SimpleForm>
+
+						</WizardStep>
+						<WizardStep
+							id="Step3"
+							title="Additional Information"
+							complete="goToFinalStep"
+							icon="sap-icon://money-bills">
+
+
+							<form:SimpleForm
+								editable="true"
+								layout="ResponsiveGridLayout"
+								title=""
+								adjustLabelSpan="false"
+								columnsL="1"
+								columnsM="1"
+								singleContainerFullSize="false" >
+
+								<core:Title text="Category Details" />
+								<Label text="Commodities" required="true"/>
+								<MultiInput
+										id="multiInput"
+										width="60%"
+										enabled="true"
+										valueHelpRequest=".onValueHelpRequested"
+										suggestionRows="{
+											path: '/Categories',
+											length: 10
+										}">
+										<suggestionColumns>
+											<Column>
+												<Label text="Category ID"/>
+											</Column>
+											<Column>
+												<Label text="Category Name"/>
+											</Column>
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<Label text="{CategoryID}" />
+												<Label text="{CategoryDesc}" />
+											</ColumnListItem>
+										</suggestionRows>
+									</MultiInput>
+								<Label text="Region" required="true"/>
+										<MultiInput
+										id="RegionMultiInput"
+										enabled="true"
+										width="60%"
+										valueHelpRequest=".onValueHelpRequestedRegion"
+										suggestionRows="{
+											path: '/Regions',
+											length: 10
+										}">
+										<suggestionColumns>
+											<Column>
+												<Label text="Region ID"/>
+											</Column>
+											<Column>
+												<Label text="Region Name"/>
+											</Column>
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<Label text="{RegionID}" />
+												<Label text="{RegionName}" />
+											</ColumnListItem>
+										</suggestionRows>
+									</MultiInput>
+
+								<core:Title text="Additional Details" />
+								<Label text="Signed NDA Required"/>
+									<RadioButtonGroup id="G001" enabled="false" selectedIndex="{/selectedNDAIndex}" select="OnSelectNDA" valueState="Information">
+										<RadioButton text="Yes"/>
+										<RadioButton text="No" />
+									</RadioButtonGroup>
+								<Label text="Is enhanced due diligence needed?" required="true"/>
+									<RadioButtonGroup id="G002" selectedIndex="{/selectedDiligenceIndex}" select="OnSelectDiligence" valueState="Information">
+										<RadioButton text="Yes"/>
+										<RadioButton text="No" />
+									</RadioButtonGroup>
+								<Label text="Additional Comments" required="false"/>
+								<TextArea id="comments" rows="8" enabled="true" value="{/SupplierRequest/Comments}" width="500px" />
+
+							</form:SimpleForm>
+
+						</WizardStep>
+					</Wizard>
+				</f:content>
+				<!-- DynamicPage Footer -->
+				<f:footer>
+					<OverflowToolbar>
+						<Button icon="sap-icon://message-popup"
+						        text="{messagesLength}"
+						        type="Emphasized"
+						        press="onMessageButtonPress"
+						        visible="{= !!$messagesLength}}"/>
+						<ToolbarSpacer/>
+						<!-- <Button type="Accept" text="Accept"/>
+						<Button type="Reject" text="Reject"/> -->
+					</OverflowToolbar>
+				</f:footer>
+			</f:DynamicPage>
+			<Page id="wizardBranchingReviewPage" showHeader="false">
+				<content>
+						<form:SimpleForm
+								editable="false"
+								layout="ResponsiveGridLayout"
+								title=""
+								adjustLabelSpan="false"
+								columnsL="1"
+								columnsM="1"
+								singleContainerFullSize="false" >
+								<core:Title text="Supplier Info" />
+								<Label text="Supplier Name" required="true"/>
+								<Text id="vsuppliername" text="{/SupplierRequest/SupplierName}" width="500px" />
+								<Label text="Supplier DBA Name" required="false"/>
+								<Text id="vsupplierdbaname" text="{/SupplierRequest/SDBAName}" width="500px"/>
+								<core:Title text="Supplier Address" />
+								<Label text="Address" required="true"/>
+								<Text id="vsupplierstaddr" text="{/SupplierRequest/SupplierStreet}" width="500px"/>
+								<Label text="City"/>
+								<Text id="vcity" text="{/SupplierRequest/SupplierCity}" width="200px"/>
+								<Label text="Region"/>
+								<Text id="vregion" text="{/SupplierRequest/SupplierRegion}" width="200px"/>
+								<Label text="Country" required="true"/>
+								<Select id="vcountry" selectedKey="{/SupplierRequest/SupplierCountry}" width="500px" enabled="false" editable="false">
+									<items>
+									    <core:Item text="USA" key="USA"/>
+										<core:Item text="England" key="England"/>
+										<core:Item text="Germany" key="Germany"/>
+										<core:Item text="India" key="India"/>
+										<core:Item text="China" key="China"/>
+										<core:Item text="Mexico" key="Mexico"/>
+										<core:Item text="Canada" key="Canada"/>
+										<core:Item text="France" key="France"/>
+										<core:Item text="Poland" key="Poland"/>
+									</items>
+								</Select>
+								<Label text="Zip Code"/>
+								<Text id="vzipcode" text="{/SupplierRequest/SupplierPostalCode}" width="150px"/>
+								<Link press="handleNavBackToGeneral" text="Edit"/>
+							</form:SimpleForm>
+
+							<form:SimpleForm
+								editable="false"
+								layout="ResponsiveGridLayout"
+								title=""
+								adjustLabelSpan="false"
+								columnsL="1"
+								columnsM="1"
+								singleContainerFullSize="false" >
+
+							<Label text="Contact First Name" required="true"/>
+							<Text id="tfname" text="{/SupplierRequest/PrimaryContactFirstName}" width="300px" />
+							<Label text="Contact Last Name" required="true"/>
+							<Text id="tlname" text="{/SupplierRequest/PrimaryContactLastName}" width="300px" />
+							<Label text="Contact Phone"/>
+							<Text id="tphone" text="{/SupplierRequest/PrimaryContactNo}" width="100px" />
+							<Label text="Contact E-Mail" required="true"/>
+							<Text id="temail" text="{/SupplierRequest/PrimaryContactEMail}" width="200px"/>
+							<Link press="handleNavBackStep2" text="Edit"/>	
+							</form:SimpleForm>
+
+
+							<form:SimpleForm
+								editable="true"
+								layout="ResponsiveGridLayout"
+								title=""
+								adjustLabelSpan="false"
+								columnsL="1"
+								columnsM="1"
+								singleContainerFullSize="false" >
+
+								<core:Title text="Category Details" />
+								<Label text="Commodities" required="true"/>
+								<MultiInput
+										id="tmultiInput"
+										width="60%"
+										enabled="false"
+										>
+										<suggestionColumns>
+											<Column>
+												<Label text="Category ID"/>
+											</Column>
+											<Column>
+												<Label text="Category Name"/>
+											</Column>
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<Label text="{CategoryID}" />
+												<Label text="{CategoryDesc}" />
+											</ColumnListItem>
+										</suggestionRows>
+									</MultiInput>
+								<Label text="Region" required="true"/>
+								<MultiInput
+										id="tRegionMultiInput"
+										width="60%"
+										enabled="false"
+										>
+										<suggestionColumns>
+											<Column>
+												<Label text="Region ID"/>
+											</Column>
+											<Column>
+												<Label text="Region Name"/>
+											</Column>
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<Label text="{RegionID}" />
+												<Label text="{RegionName}" />
+											</ColumnListItem>
+										</suggestionRows>
+									</MultiInput>
+
+								<core:Title text="Additional Details" />
+								<Label text="Signed NDA Required"/>
+									<RadioButtonGroup id="tG001" enabled="false" selectedIndex="{/selectedNDAIndex}" select="OnSelectNDA" valueState="Information">
+										<RadioButton text="Yes"/>
+										<RadioButton text="No" />
+									</RadioButtonGroup>
+								<Label text="Is enhanced due diligence needed?" required="true"/>
+									<RadioButtonGroup id="tG002" selectedIndex="{/selectedDiligenceIndex}" valueState="Information" select="OnSelectDiligence" >
+										<RadioButton text="Yes" editable="false" />
+										<RadioButton text="No" editable="false" />
+									</RadioButtonGroup>
+								<Label text="Additional Comments" required="false"/>
+								<TextArea id="ttextarea" rows="8" enabled="false" value="{/SupplierRequest/Comments}" width="500px"/>
+								<Link press="handleNavBackStep3" text="Edit"/>
+							</form:SimpleForm>
+
+
+				</content>
+				<footer>
+				
+					<Bar>
+						<contentRight>
+							<Button text="Submit" press="handleWizardSubmit"/>
+							<Button text="Cancel" press="handleWizardCancel"/>
+						</contentRight>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</NavContainer>
+</mvc:View>

@@ -1,0 +1,90 @@
+{
+	"nodes": [
+		{
+			"id": "1",
+			"lane": "0",
+			"title": "Supplier Request",
+			"titleAbbreviation": "",
+			"children": [ 2 ],
+			"state": "Positive",
+			"stateText": "Supplier Request Created",
+			"focused": false,
+			"texts": [
+				"Supplier Request Review - Complete",
+				"Validations Applied"
+			]
+		},
+		{
+			"id": "2",
+			"lane": "1",
+			"title": "DocuSign - NDA Completed",
+			"titleAbbreviation": "",
+			"children": [ 3 ],
+			"state": "Positive",
+			"stateText": "DocuSign Signature: OK",
+			"focused": true,
+			"texts": [
+				"DocuSign NDA - parties signed"
+				
+			]
+		},
+		{
+			"id": "3",
+			"lane": "2",
+			"title": "Supplier Request Approval - Completed",
+			"titleAbbreviation": "",
+			"children": [ 4 ],
+			"state": "Positive",
+			"stateText": "Supplier Request Approval: OK",
+			"focused": true,
+			"texts": [
+				"SR Approval - Completed"
+			]
+		},
+		{
+			"id": "4",
+			"lane": "3",
+			"title": "Supplier Record Created in Ariba",
+			"titleAbbreviation": "",
+			"children": null,
+			"state": "Positive",
+			"stateText": "Ariba - Supplier - OK",
+			"focused": true,
+			"texts": [
+				"Ariba Supplier and Supplier Contact Created"
+					]
+		}
+	],
+	"lanes": [
+		{
+			"id": "0",
+			"icon": "sap-icon://order-status",
+			"label": "Supplier Request - Created'",
+			"position": 0
+		},
+		{
+			"id": "1",
+			"icon": "sap-icon://customer-order-entry",
+			"label": "DocuSign - NDA Completed",
+			"position": 1
+		},
+		{
+			"id": "2",
+			"icon": "sap-icon://competitor",
+			"label": "Supplier Request Approval - Completed",
+			"position": 2
+		},
+		{
+			"id": "3",
+			"icon": "sap-icon://people-connected",
+			"label": "Supplier Record Created in Ariba",
+			"position": 3
+		},
+		{
+			"id": "4",
+			"icon": "sap-icon://sales-order-item",
+			"label": "Supplier Registration Started",
+			"position": 4
+		}
+	]
+}

@@ -1,0 +1,114 @@
+<mvc:View controllerName="com.sap.pgp.dev.SupplierControlApp.controller.Home"
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:t="sap.ui.table"
+	xmlns:microchart="sap.suite.ui.microchart"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:c="sap.suite.ui.commons"
+	xmlns:tnt="sap.tnt"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page showHeader="false">
+		<landmarkInfo>
+			<PageAccessibleLandmarkInfo rootRole="Region" rootLabel="{i18n>Home_rootLabel}" contentRole="Main" contentLabel="{i18n>Home_contentLabel}"/>
+		</landmarkInfo>
+		<Image src="{
+					parts: [{path:'i18n>homeImage'}, {path:'i18n>homeImage'}],
+					formatter: '.formatter.srcImageValue'
+					
+				}" width="100%" height="20%" />
+
+		<layout:VerticalLayout class="sapUiResponsiveMargin">
+			<Title titleStyle="H2" text="Quick Access" class="sapUiTinyMarginBegin" />
+			<layout:HorizontalLayout allowWrapping="true">
+				
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="SAP Ariba Supplier Management" press="onNavToAriba">
+					<tileContent>
+						<TileContent>
+							<content>
+								<ImageContent src="sap-icon://my-sales-order" />
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="ERP Connected Backend" subheader="SAP" press="onNavToERP">
+					<tileContent>
+						<TileContent>
+							<content>
+								<ImageContent src="sap-icon://sap-logo-shape" />
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="Approval Inbox" subheader="BTP Inbox" press="onNavToInbox">
+					<tileContent>
+						<TileContent>
+							<content>
+								<ImageContent src="sap-icon://inbox" />
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+			</layout:HorizontalLayout>
+			<Title titleStyle="H2" text="Supplier Request and Registration Controls" class="sapUiTinyMarginBegin sapUiMediumMarginTop" />
+			<layout:HorizontalLayout allowWrapping="true">
+				
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="Supplier Request" subheader="Create Supplier Request" press="onNavToProcessFlow">
+					<tileContent>
+						<TileContent>
+							<content>
+								<ImageContent src="sap-icon://customer-and-supplier" />
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="Supplier Request Overview" subheader="Onboaridng Status" press="onNavToRequestOverviewHome">
+					<tileContent>
+						<TileContent>
+							<content>
+								<ImageContent src="sap-icon://customer-and-supplier" />
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+
+			</layout:HorizontalLayout>
+
+			<Title titleStyle="H2" text="Recent Supplier Request Status" class="sapUiTinyMarginBegin sapUiMediumMarginTop" />
+			<layout:HorizontalLayout allowWrapping="true">
+
+			  <HBox items="{SRModel>/orders}"> 
+        		<items>	
+			  <VBox class="sapUiSmallMargin customCard">
+       			 <Label text="{SRModel>SRNumber}" />
+				 <Label text="{SRModel>SupplierName}" />
+				<Button visible="false" >
+						<customData>
+						<core:CustomData key="srcustomdata" value="{SRModel>SRNumber}" writeToDom="true" />
+						</customData>
+				</Button>
+				 <f:SimpleForm>
+				<c:MicroProcessFlow>
+				    <c:content>
+					<c:MicroProcessFlowItem id="srid" title="{SRModel>SRNumber}" visible="false" press="itemPress"/>
+					<c:MicroProcessFlowItem title="SR Creation" state="{SRModel>Stage1}" press="onNavToRequestOverview" icon="sap-icon://create"/>
+					<c:MicroProcessFlowItem title="DocuSign Approval" state="{SRModel>Stage2}" press="onNavToRequestOverview" icon="sap-icon://decision"/>
+					<c:MicroProcessFlowItem title="SR Approval" state="{SRModel>Stage3}" press="onNavToRequestOverview" icon="{path: 'state', formatter: '.formatIcon'}"/>
+					<c:MicroProcessFlowItem title="Supplier Creation" state="{SRModel>Stage4}" press="onNavToRequestOverview" icon="sap-icon://customer-and-supplier"/>
+					<c:MicroProcessFlowItem title="Registration Started" state="{SRModel>Stage5}" press="onNavToRequestOverview" icon="sap-icon://kpi-managing-my-area"/>
+					</c:content>
+				</c:MicroProcessFlow>
+				</f:SimpleForm>
+				<tnt:InfoLabel text="{SRModel>ApprovalState}" colorScheme="8"/>
+			</VBox>
+				 </items>
+    		</HBox>
+
+				
+			</layout:HorizontalLayout>
+
+		</layout:VerticalLayout>
+	</Page>
+</mvc:View>

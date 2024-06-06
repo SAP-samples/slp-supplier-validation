@@ -1,0 +1,24 @@
+{
+    "xsappname": "SupplierControlApp",
+    "tenant-mode": "dedicated",
+    "description": "Supplier Control Tower",
+    "scopes": [
+      {
+        "name": "$XSAPPNAME.SuperAdmin",
+        "description": "Super User"
+      }
+    ],
+    "attributes": [],
+    "authorities":["$ACCEPT_GRANTED_AUTHORITIES"],
+    "role-templates": [
+      {
+        "name": "SuperAdmin",
+        "description": "Super Administrator",
+        "scope-references": [
+          "$XSAPPNAME.SuperAdmin"
+        ],
+        "attribute-references": []
+      }
+    ]
+  }
+  

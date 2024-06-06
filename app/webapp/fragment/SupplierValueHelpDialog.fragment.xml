@@ -1,0 +1,26 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<SelectDialog
+		noDataText="No Products Found"
+		title="Select Suppliers"
+        multiSelect= "true"
+		search=".onSearch"
+		searchPlaceholder="Search Suppliers"
+        confirm=".onValueHelpDialogClose"
+		cancel=".onValueHelpDialogClose"
+		showClearButton="true"
+		items="{
+			path: 'SupplierServerModel>/Suppliers'
+		}">
+		<StandardListItem
+			selected="{selected}"
+			title="{SupplierServerModel>ACMID}"
+			description="{SupplierServerModel>SupplierName}"
+			
+			iconDensityAware="false"
+			iconInset="false"
+			type="Active" />
+	</SelectDialog>
+</c:FragmentDefinition>

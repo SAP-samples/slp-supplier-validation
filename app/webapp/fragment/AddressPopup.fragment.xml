@@ -1,0 +1,37 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:mc="sap.suite.ui.microchart"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="mainDialog"
+		title="Postal Address Check" contentWidth="500px" contentHeight="200px">
+	  <content>
+
+           <VBox class="sapUiSmallMargin">
+            <HBox justifyContent="SpaceBetween">
+                <!-- Address 1 Section -->
+                <VBox width="50%">
+                    <Label design="Bold" text="Original Address"/>
+                    <Text width="300px" text="{OriginalAddressModel>/Street}"/>
+                    <Text width="300px" text="{OriginalAddressModel>/City}"/>
+                    <Text width="300px" text="{OriginalAddressModel>/State}"/>
+                    <Text width="300px" text="{OriginalAddressModel>/zipCode}"/>
+                </VBox>
+                <!-- Address 2 Section -->
+                <VBox width="50%">
+                    <Label design="Bold" text="Suggested Address by USPS"/>
+                    <Text width="100px" text="{NewAddressModel>/StreetName}"/>
+                    <Text width="100px" text="{NewAddressModel>/CityName}"/>
+                    <Text width="100px" text="{NewAddressModel>/State}"/>
+                    <Text width="100px" text="{NewAddressModel>/ZipCode}"/>
+                    <Text width="100px" text="{NewAddressModel>/CountyName}"/>
+                </VBox>
+            </HBox>
+        </VBox>
+          
+        </content>
+		<buttons><Button text="Close" press="onCancelPressPopupPostalFlow"></Button></buttons>
+	</Dialog>
+</core:FragmentDefinition>

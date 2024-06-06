@@ -1,0 +1,60 @@
+<mvc:View controllerName="com.sap.pgp.dev.SupplierControlApp.controller.SuctExtInfo"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core">
+	<Page showHeader="true" enableScrolling="false" class="sapUiContentPadding">
+		<customHeader>
+			<Bar>
+				<contentRight>
+					<Button id="save" text="Save" type="Emphasized" press="OnPressSave" />
+				</contentRight>
+			</Bar>
+		</customHeader>
+		 <VBox class="sapUiSmallMargin">
+				<f:SimpleForm id="sregform" editable="false" layout="ResponsiveGridLayout" title="External Correlation IDs [Supplier Registration] for Updating Validation Results" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+				<f:content>
+					
+					<Label text="Validation Process" />
+					<Input maxLength="10" width="250px" value= "{RulesModel>/ValidationProcess}"
+						id="ValidationProcess"
+						ariaLabelledBy="inputTextLabel"/>
+
+					
+					<Label text="Last Validation Date" />
+					<Input maxLength="10" width="250px"  value= "{RulesModel>/ValidationDate}"
+						id="ValidationDate"
+						ariaLabelledBy="inputTextLabel"/>
+
+
+					<Label text="TIN Validation" />
+					<Input maxLength="10" width="250px"  value= "{RulesModel>/IRSTin}"
+						id="IRSTin"
+						ariaLabelledBy="inputTextLabel"/>
+
+
+					<Label text="OFAC Validation" />
+					<Input maxLength="10" width="250px" value= "{RulesModel>/Ofac}"
+						id="Ofac"
+						ariaLabelledBy="inputTextLabel"/>
+
+					<Label text="Address Validation" />
+					<Input maxLength="10" width="250px"  value= "{RulesModel>/AddressValid}"
+						id="AddressValid"
+						ariaLabelledBy="inputTextLabel"/>
+
+
+					<Label text="DocuSign NDA Completion" />
+					<Input maxLength="10" width="250px"  value= "{RulesModel>/DocuSign}"
+						id="DocuSign"
+						ariaLabelledBy="inputTextLabel"/>
+
+
+				</f:content>
+
+			</f:SimpleForm>
+		</VBox>
+
+	</Page>
+</mvc:View>

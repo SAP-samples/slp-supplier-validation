@@ -1,0 +1,20 @@
+{
+	"timeMeasure": "h",
+	"Suppliers": [
+		{
+			"id": "SR- New",
+			"deliveryTime": 20,
+			"deliveryTimeSemantics": "Good"
+		},
+		{
+			"id": "SR - In Process",
+			"deliveryTime": 12,
+			"deliveryTimeSemantics": "Error"
+		},
+		{
+			"id": "SR - Completed",
+			"deliveryTime": 11,
+			"deliveryTimeSemantics": "Critical"
+		}
+	]
+}

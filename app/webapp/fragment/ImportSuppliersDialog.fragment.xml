@@ -1,0 +1,39 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="ImportSupplierDialog"
+		title="Import Suppliers(Ariba and SCT)"
+        busy="{SuppliersModel>/isSupplierImportLoading}">
+		<content>
+			<VBox class="sapUiSmallMargin" id="supplierFormContainer">
+                <UploadCollection
+                    id="UploadSupplier"
+                    maximumFilenameLength="55"
+                    maximumFileSize="10"
+                    instantUpload="false"
+                    noDataDescription="Drop files or use the &quot;Add&quot; button to keep files ready for upload"
+                    change=".SupplierController.handleFiles"
+                />
+                <MessageStrip
+                type="Warning"
+                text="Please Load CSV file to bulk upload Suppliers data."
+                class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom" />
+			</VBox>
+		</content>
+		<Toolbar>
+            <content>
+                <ToolbarSpacer />
+                <Button type="Accept"
+                        text="Upload Now"
+                        press=".SupplierController.onStartUpload" />
+                <Button id="Reject"
+                    text="Close"
+                    type="Reject"
+                    press="._closeSupplierDialog" />
+            </content>
+        </Toolbar>
+	</Dialog>
+</core:FragmentDefinition>

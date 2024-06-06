@@ -1,0 +1,105 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:mc="sap.suite.ui.microchart"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="mainDialog"
+		title="Supplier Duplication Check" contentWidth="800px" contentHeight="700px">
+		<content>
+			   <Table headerText = "Match against Ariba Sourcing" items="{SupplierDupModel>/}">
+        <columns>
+            <!-- Supplier ID Column -->
+            <Column>
+                <Text text="Supplier ID" />
+            </Column>
+
+            <!-- Supplier Name Column -->
+            <Column>
+                <Text text="Supplier Name" />
+            </Column>
+
+            <Column>
+                <Text text="Supplier Street" />
+            </Column>
+
+			 <Column>
+                <Text text="Supplier Country" />
+            </Column>
+
+            <!-- MicroChart Column -->
+            <Column>
+                <Text text="Match Score" />
+            </Column>
+        </columns>
+
+        <items>
+            <ColumnListItem>
+                <!-- Supplier ID -->
+                <cells>
+                    <Text text="{SupplierDupModel>SupplierID}" />
+
+                    <!-- Supplier Name -->
+                    <Text text="{SupplierDupModel>SupplierName}" />
+
+					<Text text="{SupplierDupModel>SupplierStr}" />
+
+					<Text text="{SupplierDupModel>SupplierCountry}" />
+
+                    <mc:RadialMicroChart percentage="{SupplierDupModel>MatchScore}" valueColor="Good" />
+
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+     <Table headerText = "Match against SAP ERP" items="{SupplierDupModelNew>/}">
+        <columns>
+            <!-- Supplier ID Column -->
+            <Column>
+                <Text text="ERP ID" />
+            </Column>
+
+            <!-- Supplier Name Column -->
+            <Column>
+                <Text text="Supplier Name" />
+            </Column>
+
+            <Column>
+                <Text text="Supplier Street" />
+            </Column>
+
+			 <Column>
+                <Text text="Supplier Country" />
+            </Column>
+
+            <!-- MicroChart Column -->
+            <Column>
+                <Text text="Match Score" />
+            </Column>
+        </columns>
+
+        <items>
+            <ColumnListItem>
+                <!-- Supplier ID -->
+                <cells>
+                    <Text text="{SupplierDupModelNew>SupplierID}" />
+
+                    <!-- Supplier Name -->
+                    <Text text="{SupplierDupModelNew>SupplierName}" />
+
+					<Text text="{SupplierDupModelNew>SupplierStr}" />
+
+					<Text text="{SupplierDupModelNew>SupplierCountry}" />
+
+                    <mc:RadialMicroChart percentage="{SupplierDupModelNew>MatchScore}" valueColor="Good" />
+
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+		</content>
+		<buttons><Button text="Close" press="onCancelPressPopupFlow"></Button></buttons>
+	</Dialog>
+</core:FragmentDefinition>

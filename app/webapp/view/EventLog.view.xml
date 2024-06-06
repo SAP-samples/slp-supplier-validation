@@ -1,0 +1,21 @@
+<mvc:View xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable" controllerName="com.sap.pgp.dev.SupplierControlApp.controller.EventLog" height="100%">
+	<Page showHeader="false">
+
+		<!-- use this to make the table occupy the available screen height -->
+		<VBox fitContainer="true">
+			<smartFilterBar:SmartFilterBar id="EventLogFilterBar" smartVariant="true" entitySet="EventLogs" enableBasicSearch="true">
+			</smartFilterBar:SmartFilterBar>
+
+			<smartTable:SmartTable id="EventLogTable" entitySet="EventLogs" smartFilterId="EventLogFilterBar" tableType="ResponsiveTable" useExportToExcel="true" useVariantManagement="false" useTablePersonalisation="true" header="EventLog" showRowCount="true" enableAutoBinding="true" class="sapUiResponsiveContentPadding" initiallyVisibleFields="Module,RequestOBJ,TransactionDate,EventMessage,Status">
+				<!-- layout data used to make the table growing but the filter bar fixed -->
+				<smartTable:layoutData>
+					<FlexItemData growFactor="1" baseSize="0%"/>
+				</smartTable:layoutData>
+			</smartTable:SmartTable>
+		</VBox>
+	</Page>
+
+</mvc:View>

@@ -1,0 +1,24 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		title="Session Timeout"
+		contentWidth="20rem"
+		verticalScrolling="false">
+		<buttons>
+			<Button
+				visible="{= !${/bIsExpiring} }"
+				text="SignIn"
+				press="onSignIn"
+				type="Emphasized" />
+			<Button
+				visible="{= !${/bIsExpiring} }"
+				text="Close"
+				press="onDialogClose"/>
+		</buttons>
+		<IllustratedMessage
+			title="Your session has expired"
+			description="Sign in to pick up where you left off."
+			illustrationType="tnt-SessionExpired" />
+	</Dialog>
+</core:FragmentDefinition>

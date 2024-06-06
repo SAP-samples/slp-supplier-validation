@@ -1,0 +1,31 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:commons="sap.suite.ui.commons"
+>
+<Dialog
+    title="Process Flow"
+    class="sapUiPopupWithPadding"
+  
+    draggable="true"
+    stretch="false"
+    afterClose="onCancelPressForItemDialog">
+    
+    <content>
+        <commons:ProcessFlow id="processflow" scrollable="false" nodePress="onNodePress" nodes="{ProcessFlow>/nodes}" lanes="{ProcessFlow>/lanes}">
+            <commons:nodes>
+                <commons:ProcessFlowNode laneId="{ProcessFlow>lane}" nodeId="{ProcessFlow>id}" title="{ProcessFlow>title}" titleAbbreviation="{ProcessFlow>titleAbbreviation}" children="{ProcessFlow>children}" state="{ProcessFlow>state}" stateText="{ProcessFlow>stateText}" texts="{ProcessFlow>texts}" focused="{ProcessFlow>focused}" />
+            </commons:nodes>
+            <commons:lanes>
+                <commons:ProcessFlowLaneHeader laneId="{ProcessFlow>id}" iconSrc="{ProcessFlow>icon}" text="{ProcessFlow>label}" position="{ProcessFlow>position}" />
+            </commons:lanes>
+        </commons:ProcessFlow>
+    </content>
+
+    <endButton>
+      <Button text="Close" press="onCancelPressForItemDialog" />
+    </endButton>
+  </Dialog>
+
+
+</c:FragmentDefinition>

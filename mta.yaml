@@ -1,0 +1,158 @@
+## Generated mta.yaml based on template version 0.4.0
+## appName = SupplierControlApp
+## language=nodejs; multiTenant=false
+## approuter=
+_schema-version: '3.1'
+ID: SupplierControlApp
+version: 1.0.0
+description: "Supplier Control Portal"
+parameters:
+  enable-parallel-deployments: true
+   
+build-parameters:
+  before-all:
+   - builder: custom
+     commands:
+      - npm install --production
+      - cds build --production
+      - bash pg-build.sh
+      - npx cds compile '*' > gen/pg/db/csn.json
+
+modules:
+# --------------------- FRONTEND MODULE ------------------------
+ - name: SupplierControlApp
+# --------------------------------------------------------------
+   type: html5
+   path: app/
+   parameters:
+     disk-quota: 1GB
+     memory: 1GB
+   properties:
+     httpHeaders:
+       - X-Frame-Options: ALLOW-FROM https://*.ondemand.com https://s3.ariba.com https://s1-2.ariba.com https://s1-eu.ariba.com https://s1.ariba.com https://sap-build-zuedubhc.authentication.eu12.hana.ondemand.com https://sap-build-zuedubhc.eu12.sapdas-staging.cloud.sap
+       - Content-Security-Policy: frame-ancestors https://*.ondemand.com https://s3.ariba.com https://s1-2.ariba.com https://s1-eu.ariba.com https://s1.ariba.com https://sap-build-zuedubhc.authentication.eu12.hana.ondemand.com https://sap-build-zuedubhc.eu12.sapdas-staging.cloud.sap
+   build-parameters:
+     ignore: ["node_modules/"]  
+     builder: custom
+     commands:
+        - ui5 build
+   requires:
+    # Resources extracted from CAP configuration
+    - name: SupplierControlApp_xsuaa
+    - name: SupplierControlApp_destination
+    - name: SupplierControlApp_connectivity
+    - name: backend 
+      group: destinations
+      properties:
+        name: backend
+        url: ~{srv-url}
+        forwardAuthToken: true 
+
+ # --------------------- SERVER MODULE ------------------------
+ - name: SupplierControlApp-srv
+ # ------------------------------------------------------------
+   type: nodejs
+   path: gen/srv
+   properties:
+      EXIT: 1  # required by deploy.js task to terminate 
+      SAP_JWT_TRUST_ACL:
+      - clientid: "*"
+      identityzone: "*"
+      SESSION_TIME: 3000000
+   provides:
+    - name: backend      # required by consumers of CAP services (e.g. approuter)
+      properties:
+        srv-url: ${default-url}
+   requires:
+    # Resources extracted from CAP configuration
+    - name: SupplierControlApp-pgdatabase
+    - name: SupplierControlApp_xsuaa
+    - name: SupplierControlApp_destination
+    - name: SupplierControlApp_connectivity
+    - name: backend 
+      group: destinations
+      properties:
+        name: backend
+        url: ~{srv-url}
+        forwardAuthToken: true 
+    - name: SupplierControlApp_jobscheduler
+    - name: ITKApp-log
+ # --------------------- DB MODULE ------------------------
+ - name: SupplierControlApp-db
+ # ------------------------------------------------------------
+   type: custom
+   path: gen/pg
+   parameters:
+     disk-quota: 1GB
+     memory: 1GB
+     no-start: true
+     no-route: true
+     tasks:
+       - name: deploy-to-postgresql
+         command: npm start
+   build-parameters:
+     ignore: ["node_modules/"]
+   requires:
+     - name: SupplierControlApp-pgdatabase
+
+resources:
+ # services extracted from CAP configuration
+ # 'service-plan' can be configured via 'cds.requires.<name>.vcap.plan'
+# ------------------------------------------------------------
+ - name: SupplierControlApp-pgdatabase
+# ------------------------------------------------------------
+   parameters:
+     path: ./pg-options.json
+     service: postgresql-db
+     service-plan: standard
+     skip-service-updates:
+      parameters: true
+     service-tags:
+       - plain
+   type: org.cloudfoundry.managed-service
+
+# ------------------------------------------------------------
+ - name: SupplierControlApp_xsuaa
+# ------------------------------------------------------------
+   type: org.cloudfoundry.managed-service
+   parameters:
+     service: xsuaa
+     service-plan: application  
+     path: ./xs-security.json
+     config:
+       xsappname: SupplierControlApp-${space}
+       tenant-mode: dedicated
+
+# ------------------------------------------------------------
+ - name: SupplierControlApp_destination
+# ------------------------------------------------------------
+   type: org.cloudfoundry.managed-service
+   parameters:
+     service-plan: lite
+     service: destination
+
+# ------------------------------------------------------------
+ - name: SupplierControlApp_connectivity
+# ------------------------------------------------------------
+   type: org.cloudfoundry.managed-service
+   parameters:
+     service-plan: lite
+     service: connectivity
+
+# ------------------------------------------------------------
+ - name: SupplierControlApp_jobscheduler
+# ------------------------------------------------------------
+   type: org.cloudfoundry.managed-service
+   parameters:
+     service-plan: standard
+     service: jobscheduler
+     config:
+      enable-xsuaa-support: true   
+
+# ------------------------------------------------------------
+ - name: ITKApp-log
+# ------------------------------------------------------------
+   type: org.cloudfoundry.existing-service
+   parameters:
+     service-plan: standard
+     service: application-logs

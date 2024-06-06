@@ -1,0 +1,137 @@
+<!-- <mvc:View displayBlock="true" controllerName="com.sap.pgp.dev.SupplierControlApp.controller.Categories2SupplierMap"
+	xmlns="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:unified="sap.ui.unified"
+	xmlns:core="sap.ui.core"
+	xmlns:commons="sap.suite.ui.commons"
+	xmlns:tnt="sap.tnt"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:m="sap.m" height="100%">
+
+	<m:Page showHeader="false" enableScrolling="false" class="sapUiContentPadding">
+		<m:FlexBox class="sapUiSmallMargin" justifyContent="End">
+			<m:MenuButton text="Actions">
+				<m:menu>
+					<m:Menu itemSelected="onMenuAction">
+						<m:MenuItem text="Download Preferred Suppliers Sample CSV" icon="sap-icon://download" press=".onDownloadFile" />
+						<m:MenuItem text="Import Preferred Suppliers" icon="sap-icon://upload" press=".onOpenCategories2SuppliersImportDialog" />
+					</m:Menu>
+				</m:menu>
+			</m:MenuButton>
+		</m:FlexBox>
+
+		<Table id="Categories2SuppliersTable" rows="{Categories2SupplierData>/data}" selectionMode="None" visibleRowCount="12" rowActionCount="1">
+
+
+			<extension>
+				<m:OverflowToolbar>
+					<m:Title id="title" text="List of Preferred Suppliers"/>
+
+					<m:ToolbarSpacer/>
+					<m:SearchField search="handleCategories2SuppliersSearch" width="17.5rem"/>
+				</m:OverflowToolbar>
+			</extension>
+			<columns>
+				<Column width="auto">
+					<m:Label text="Commodity ID"/>
+					<template>
+						<m:Text text="{Categories2SupplierData>CategoryID}" wrapping="false"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Commodity Desc"/>
+					<template>
+						<m:Text text="{Categories2SupplierData>CategoryDesc}" wrapping="false"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Supplier ID"/>
+					<template>
+						<m:Text text="{Categories2SupplierData>SupplierID}" wrapping="false"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Supplier Name"/>
+					<template>
+						<m:Text text="{Categories2SupplierData>SupplierName}" wrapping="false"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Supplier ACMID"/>
+					<template>
+						<m:Text text="{Categories2SupplierData>Suppliers_ACMID}" wrapping="false"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Supplier City"/>
+					<template>
+						<m:Text text="{Categories2SupplierData>SupplierCity}" wrapping="false"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Supplier Street"/>
+					<template>
+						<m:Text text="{Categories2SupplierData>SupplierStreet}" wrapping="false"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Supplier Region"/>
+					<template>
+						<m:Text text="{Categories2SupplierData>SupplierRegion}" wrapping="false"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Supplier Country"/>
+					<template>
+						<m:Text text="{Categories2SupplierData>SupplierCountry}" wrapping="false"/>
+					</template>
+				</Column>
+
+			</columns>
+		</Table>
+
+		<m:VBox class="sapUiSmallMargin">
+
+		</m:VBox>
+
+	</m:Page>
+
+</mvc:View> -->
+
+<mvc:View xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable" 
+	controllerName="com.sap.pgp.dev.SupplierControlApp.controller.Categories2SupplierMap" height="100%">
+	<Page showHeader="false">
+
+	<!-- use this to make the table occupy the available screen height -->
+	<VBox fitContainer="true">
+		<smartFilterBar:SmartFilterBar id="Categories2SuppliersFilterBar" smartVariant="true" entitySet="Categories2Suppliers" enableBasicSearch="true">
+		</smartFilterBar:SmartFilterBar>
+
+		<smartTable:SmartTable id="Categories2SuppliersTable" entitySet="Categories2Suppliers" smartFilterId="Categories2SuppliersFilterBar" tableType="Table" useExportToExcel="true" useVariantManagement="false" useTablePersonalisation="true" header="Regions" showRowCount="true" enableAutoBinding="true" class="sapUiResponsiveContentPadding" initiallyVisibleFields="CategoryID,CategoryDesc,SupplierID,SupplierName,Suppliers_ACMID,SupplierCity,SupplierStreet,SupplierRegion,SupplierCountry">
+			<!-- layout data used to make the table growing but the filter bar fixed -->
+			<smartTable:customToolbar>
+			<OverflowToolbar design="Transparent">
+				<ToolbarSpacer/>
+				<MenuButton text="Actions">
+				<menu>
+					<Menu itemSelected="onMenuAction">
+						<MenuItem text="Download Preferred Suppliers Sample CSV" icon="sap-icon://download" press=".onDownloadFile" />
+						<MenuItem text="Import Preferred Suppliers" icon="sap-icon://upload" press=".onOpenCategories2SuppliersImportDialog" />
+					</Menu>
+				</menu>
+			</MenuButton>
+			</OverflowToolbar>			
+		</smartTable:customToolbar>
+			<smartTable:layoutData>
+				<FlexItemData growFactor="1" baseSize="0%"/>
+			</smartTable:layoutData>
+		</smartTable:SmartTable>
+	</VBox>
+	</Page>
+
+</mvc:View>
+

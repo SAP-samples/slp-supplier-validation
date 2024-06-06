@@ -1,0 +1,158 @@
+<mvc:View controllerName="com.sap.pgp.dev.SupplierControlApp.controller.ValidationCC"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core">
+	<Page showHeader="true" enableScrolling="false" class="sapUiContentPadding">
+		<customHeader>
+			<Bar>
+				<contentRight>
+					<Button id="save" text="Save" type="Emphasized" press="OnPressSave" />
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<VBox class="sapUiSmallMargin">
+			<f:SimpleForm id="SimpleFormDisplay354" editable="false" layout="ResponsiveGridLayout" title="Supplier Request Validations" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+				<f:content>
+					<Label text="Supplier Address Check" />
+					<Switch id="SRaddrcheck" state="{RulesModel>/SRaddrcheck}">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+
+					<Label text="Duplicate Name Check with Ariba" />
+					<Switch id="SRdupariba" state="{RulesModel>/SRdupariba}">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+
+					<Label text="Duplicate Name Check with ERP" />
+					<Switch id="SRDuplicateERP" state="{RulesModel>/SRDuplicateERP}">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+
+					<Label text="Duns and BradStreet Validations" />
+					<Switch id="SRDandB" state="{RulesModel>/SRDandB}">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+
+					<Label text="DocuSign Integration for NDA" />
+					<Switch id="SRDocuSign" state="{RulesModel>/SRDocuSign}">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+
+				</f:content>
+
+			</f:SimpleForm>
+		</VBox>
+
+		 <VBox class="sapUiSmallMargin">
+					<f:SimpleForm id="sregform" editable="false" layout="ResponsiveGridLayout" title="Supplier Registration Validations" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+				<f:content>
+					<Label text="Supplier Address Check" />
+					<Switch id="srgaddrcheck" state="{RulesModel>/SRGaddrcheck}" change="onsrgaddrcheck">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+
+					<Label text="Address External Correlation ID" />
+					<Input maxLength="10" width="250px" visible="false" value= "{RulesModel>/SRGAddrinput}"
+						id="ADDRID"
+						placeholder="External Correlation ID for Address"
+						ariaLabelledBy="inputTextLabel"/>
+
+					<Label text="Duplicate Name Check with Ariba" />
+					<Switch id="srgdupariba" state="{RulesModel>/SRGgdupariba}">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+
+					<Label text="Duplicate Name Check with ERP" />
+					<Switch id="srgduplicateerp" state="{RulesModel>/SRGduplicateerp}">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+
+					<Label text="Duns and BradStreet Validations" />
+					<Switch id="srgdandb" state="{RulesModel>/srgdandb}" change="onsrgdandbChange">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+					<Label text="DandB External Correlation ID" />
+					<Input maxLength="10" width="250px" visible="false" value= "{RulesModel>/srgdandbinput}"
+						id="DandBEXTID"
+						placeholder="External Correlation ID for DandB"
+						ariaLabelledBy="inputTextLabel"/>
+
+					<Label text="DocuSign Integration for NDA" />
+					<Switch id="srgdocusign" state="{RulesModel>/SRGdocusign}" >
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+
+					<Label text="Office of Foreign Assets Control Check" />
+					<Switch id="srgofac" state="{RulesModel>/SRGofac}" change="onsrgofac">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+					<Label text="OFAC External Correlation ID" />
+					<Input maxLength="10" width="250px" visible="false" value= "{RulesModel>/SRGOFACinput}"
+						id="OFACEXTID"
+						placeholder="External Correlation ID for OFAC"
+						ariaLabelledBy="inputTextLabel"/>
+
+					<Label text="TIN Validations" />
+					<Switch id="srgtin" state="{RulesModel>/SRGtin}" change="onsrgtin" >
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+
+					<Label text="TIN External Correlation ID" />
+					<Input maxLength="25" width="400px" visible="false" value= "{RulesModel>/SRGtininput}"
+						id="TINEXTID"
+						placeholder="External Correlation ID for TIN and Name"
+						ariaLabelledBy="inputTextLabel"/>
+
+					<Label text="EIN Validation" />
+					<Switch id="srgein" state="{RulesModel>/SRGein}" change="onsrgein">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+					<Label text="EIN External Correlation ID" />
+					<Input maxLength="10" width="250px" visible="false" value= "{RulesModel>/SRGeininput}"
+						id="EINEXTID"
+						placeholder="External Correlation ID for EIN"
+						ariaLabelledBy="inputTextLabel"/>
+
+
+					<Label text="Bank Validation with SAP ERP" />
+					<Switch id="srgbankvalidation" state="{RulesModel>/SRGbankvalidation}">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+
+				</f:content>
+
+			</f:SimpleForm>
+		</VBox>
+
+	</Page>
+</mvc:View>

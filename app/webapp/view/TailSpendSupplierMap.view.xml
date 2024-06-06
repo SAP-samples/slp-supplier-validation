@@ -1,0 +1,35 @@
+<mvc:View xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable" controllerName="com.sap.pgp.dev.SupplierControlApp.controller.TailSpendSupplierMap" height="100%">
+	<Page showHeader="false">
+
+		<!-- use this to make the table occupy the available screen height -->
+		<VBox fitContainer="true">
+			<smartFilterBar:SmartFilterBar id="TailSpendSupplierFilterBar" smartVariant="true" entitySet="TailSpendSuppliers" enableBasicSearch="true">
+			</smartFilterBar:SmartFilterBar>
+
+
+			<smartTable:SmartTable id="TailSpendSupplierTable" entitySet="TailSpendSuppliers" beforeRebindTable="onBeforeRebindTable" smartFilterId="TailSpendSupplierFilterBar" tableType="Table" useExportToExcel="true" useVariantManagement="false" useTablePersonalisation="true" header="Tail Spend Supplier" showRowCount="true" enableAutoBinding="true" class="sapUiResponsiveContentPadding" initiallyVisibleFields="ACMID,CategoryID,RegionID,SLPID,SupplierID,SupplierName,contactfn,contactln,contactemail,City,Country,AutoRFQEligble">
+				<!-- layout data used to make the table growing but the filter bar fixed -->
+				<smartTable:customToolbar>
+					<OverflowToolbar design="Transparent">
+						<ToolbarSpacer/>
+						<MenuButton text="Actions" visible="{= ${SiteControlParams>/DataLakeEnabled} ? false : true}">
+							<menu>
+								<Menu itemSelected="onMenuAction">
+									<MenuItem text="Download Tail Spend Suppliers Sample CSV" icon="sap-icon://download" press=".onDownloadFile" />
+									<MenuItem text= "Import Tail Spend Suppliers" icon="sap-icon://upload" press=".onOpenTailSpendSupplierImportDialog" />
+								</Menu>
+							</menu>
+						</MenuButton>
+					</OverflowToolbar>
+				</smartTable:customToolbar>
+				<smartTable:layoutData>
+					<FlexItemData growFactor="1" baseSize="0%"/>
+				</smartTable:layoutData>
+			</smartTable:SmartTable>
+		</VBox>
+	</Page>
+
+</mvc:View>

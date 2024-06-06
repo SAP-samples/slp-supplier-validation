@@ -1,0 +1,8 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:core="sap.ui.core">
+    <BusyDialog
+            title="Joule"
+            text="... Initiating Joule Assistant to interact with you!"
+            showCancelButton="true"/>
+</core:FragmentDefinition>

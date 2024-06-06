@@ -1,0 +1,11 @@
+.customVBox {
+    border: 2px solid #000000;
+}
+
+.customCard {
+    border: 2px solid #000000; /* Solid black border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Optional: adds a shadow for a deeper card effect */
+    padding: 10px; /* Optional: adds some spacing inside the VBox */
+    background-color: #ffffff; /* Optional: sets a background color */
+}

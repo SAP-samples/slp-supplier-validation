@@ -1,0 +1,119 @@
+<mvc:View
+	controllerName="com.sap.pgp.dev.SupplierControlApp.controller.SupplierRequestDetails"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	height="100%">
+			<Page id="wizardBranchingReviewPage" showHeader="true"
+		enableScrolling="false"
+		class="sapUiContentPadding">
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Button id="Back" text="Back" type="Emphasized" press="OnPressBack" />
+				</contentLeft>
+				<contentRight>
+					<Button id="SRStatus" text="View SR Status" type="Emphasized" press="OnPressStatus" />
+				</contentRight>
+			</Bar>
+		</customHeader>
+				<content>
+						<form:SimpleForm
+								editable="false"
+								layout="ResponsiveGridLayout"
+								title=""
+								adjustLabelSpan="false"
+								columnsL="1"
+								columnsM="1"
+								singleContainerFullSize="false" >
+								<core:Title text="Supplier Info" />
+								<Label text="Supplier Name X" required="true"/>
+								<Text id="vsuppliername" text="{SRData>/SupplierName}" width="500px" />
+								<Label text="Supplier DBA Name" required="false"/>
+								<Text id="vsupplierdbaname" text="{SRData>/SDBAName}" width="500px"/>
+								<core:Title text="Supplier Address" />
+								<Label text="Address" required="true"/>
+								<Text id="vsupplierstaddr" text="{SRData>/SupplierStreet}" width="500px"/>
+								<Label text="City"/>
+								<Text id="vcity" text="{SRData>/SupplierCity}" width="200px"/>
+								<Label text="Region"/>
+								<Text id="vregion" text="{SRData>/SupplierRegion}" width="200px"/>
+								<Label text="Country" required="true"/>
+								<Select id="vcountry" selectedKey="{/SupplierRequest/SupplierCountry}" width="500px" enabled="false" editable="false">
+									<items>
+									    <core:Item text="USA" key="USA"/>
+										<core:Item text="England" key="England"/>
+										<core:Item text="Germany" key="Germany"/>
+										<core:Item text="India" key="India"/>
+										<core:Item text="China" key="China"/>
+										<core:Item text="Mexico" key="Mexico"/>
+										<core:Item text="Canada" key="Canada"/>
+										<core:Item text="France" key="France"/>
+										<core:Item text="Poland" key="Poland"/>
+									</items>
+								</Select>
+								<Label text="Zip Code"/>
+								<Text id="vzipcode" text="{SRData>/SupplierPostalCode}" width="150px"/>
+								
+							</form:SimpleForm>
+
+							<form:SimpleForm
+								editable="false"
+								layout="ResponsiveGridLayout"
+								title=""
+								adjustLabelSpan="false"
+								columnsL="1"
+								columnsM="1"
+								singleContainerFullSize="false" >
+
+							<Label text="Contact First Name" required="true"/>
+							<Text id="tfname" text="{SRData>/PrimaryContactFirstName}" width="300px" />
+							<Label text="Contact Last Name" required="true"/>
+							<Text id="tlname" text="{SRData>/PrimaryContactLastName}" width="300px" />
+							<Label text="Contact Phone"/>
+							<Text id="tphone" text="{SRData>/PrimaryContactNo}" width="100px" />
+							<Label text="Contact E-Mail" required="true"/>
+							<Text id="temail" text="{SRData>/PrimaryContactEMail}" width="200px"/>
+		
+							</form:SimpleForm>
+
+
+							<form:SimpleForm
+								editable="true"
+								layout="ResponsiveGridLayout"
+								title=""
+								adjustLabelSpan="false"
+								columnsL="1"
+								columnsM="1"
+								singleContainerFullSize="false" >
+
+								<core:Title text="Category Details" />
+								<Label text="Commodities" required="true"/>
+								<Text id="tcommodities" text="{SRData>/Categories}" width="300px"/>
+								<Label text="Region" required="true"/>
+							    <Text id="tregions" text="{SRData>/Regions}" width="300px"/>
+
+								<core:Title text="Additional Details" />
+								<Label text="Signed NDA Required"/>
+									<RadioButtonGroup id="tG001" enabled="false" selectedIndex="{/selectedNDAIndex}" select="OnSelectNDA" valueState="Information">
+										<RadioButton text="Yes"/>
+										<RadioButton text="No" />
+									</RadioButtonGroup>
+								<Label text="Is enhanced due diligence needed?" required="true"/>
+									<RadioButtonGroup id="tG002" selectedIndex="{/selectedDiligenceIndex}" valueState="Information" select="OnSelectDiligence" >
+										<RadioButton text="No" editable="false" />
+										<RadioButton text="Yes" editable="false" />
+									</RadioButtonGroup>
+								<Label text="Additional Comments" required="false"/>
+								<TextArea id="ttextarea" rows="8" enabled="false" value="{SRData>/Comments}" width="500px"/>
+			
+							</form:SimpleForm>
+
+
+				</content>
+			</Page>
+
+</mvc:View>

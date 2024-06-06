@@ -1,0 +1,35 @@
+<mvc:View xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable" 
+	controllerName="com.sap.pgp.dev.SupplierControlApp.controller.MaterialGroup2CommodityMap" height="100%">
+	<Page showHeader="false">
+
+	<!-- use this to make the table occupy the available screen height -->
+	<VBox fitContainer="true">
+		<smartFilterBar:SmartFilterBar id="MaterialGroup2CommodityBar" smartVariant="true" entitySet="MaterialGroup2Commodity" enableBasicSearch="true">
+		</smartFilterBar:SmartFilterBar>
+
+		<smartTable:SmartTable id="MaterialGroup2CommodityTable" entitySet="MaterialGroup2Commodity" smartFilterId="MaterialGroup2CommodityFilterBar" tableType="Table" useExportToExcel="true" useVariantManagement="false" useTablePersonalisation="true" header="Material Group to Commodity" showRowCount="true" enableAutoBinding="true" class="sapUiResponsiveContentPadding" initiallyVisibleFields="MaterialGroupID,MaterialGroupDesc,CommodityID,CommodityDesc">
+			<!-- layout data used to make the table growing but the filter bar fixed -->
+			<smartTable:customToolbar>
+			<OverflowToolbar design="Transparent">
+				<ToolbarSpacer/>
+				<MenuButton text="Actions">
+				<menu>
+					<Menu itemSelected="onMenuAction">
+						<MenuItem text="Download MaterialGroup2Commodity Sample CSV" icon="sap-icon://download" press=".onDownloadFile" />
+						<MenuItem text="Import MaterialGroup2Commodity" icon="sap-icon://upload" press=".onOpenMaterialGroup2CommodityImportDialog" />
+					</Menu>
+				</menu>
+			</MenuButton>
+			</OverflowToolbar>			
+		</smartTable:customToolbar>
+			<smartTable:layoutData>
+				<FlexItemData growFactor="1" baseSize="0%"/>
+			</smartTable:layoutData>
+		</smartTable:SmartTable>
+	</VBox>
+	</Page>
+
+</mvc:View>

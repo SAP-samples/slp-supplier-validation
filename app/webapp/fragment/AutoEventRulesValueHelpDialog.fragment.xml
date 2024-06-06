@@ -1,0 +1,26 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<SelectDialog
+		noDataText="No Products Found"
+		title="Select Region"
+        multiSelect= "false"
+		search=".onSearch"
+		searchPlaceholder="Search Region"
+        confirm=".onDialogClose"
+		cancel=".onValueHelpDialogClose"
+		showClearButton="true"
+		items="{
+			path: 'AdminMo>/Regions'
+		}">
+		<StandardListItem
+			selected="{selected}"
+			title="{AdminMo>RegionID}"
+			description="{AdminMo>RegionName}"
+			
+			iconDensityAware="false"
+			iconInset="false"
+			type="Active" />
+	</SelectDialog>
+</c:FragmentDefinition>

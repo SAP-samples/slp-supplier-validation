@@ -1,0 +1,80 @@
+{
+  "selectedKey": "",
+
+  "navigation": [
+    {
+      "titleI18nKey": "Home",
+      "icon": "sap-icon://home",
+      "expanded": true,
+      "key": "",
+      "items": []
+    },
+    {
+      "titleI18nKey": "Supplier Management",
+      "icon": "sap-icon://monitor-payments",
+      "expanded": true,
+      "key": "SupplierManagement",
+      "items": [
+        {
+          "titleI18nKey": "Supplier By Category",
+          "key": "SupplierByCategory"
+        },
+        {
+          "titleI18nKey": "Create Supplier Request",
+          "key": "SupplierRequest"
+        },
+        {
+          "titleI18nKey": "Supplier Request Overview",
+          "key": "SupplierRequestList"
+        }
+      ]
+    },
+    {
+      "titleI18nKey": "Administration",
+      "icon": "sap-icon://monitor-payments",
+      "expanded": true,
+      "key": "ConfigurationUpload",
+      "items": [
+        {
+          "titleI18nKey": "Site Control Parameters",
+          "key": "SiteControlParams"
+        },
+        {
+          "titleI18nKey": "Regions",
+          "key": "RegionMap"
+        },
+        {
+          "titleI18nKey": "Commodities",
+          "key": "CategoryMap"
+        },
+        {
+          "titleI18nKey": "Suppliers",
+          "key": "Suppliers"
+        },
+        {
+          "titleI18nKey": "Validation Control Center",
+          "key": "ValidationCC"
+        },
+        {
+          "titleI18nKey": "External Correlation for Validation",
+          "key": "SuctExtInfo"
+        }
+        
+      ]
+    },
+    {
+      "titleI18nKey": "Reporting",
+      "icon": "sap-icon://line-chart",
+      "expanded": true,
+      "key": "statistics",
+      "items": []
+    }
+  ],
+  "fixedNavigation": [
+    {
+      "titleI18nKey": "Legal",
+      "icon": "sap-icon://compare",
+      "key": "legal"
+    }
+  ]
+}

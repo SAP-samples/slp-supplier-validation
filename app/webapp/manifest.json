@@ -1,0 +1,521 @@
+{
+  "_version": "1.21.0",
+  "sap.app": {
+    "id": "com.sap.pgp.dev.SupplierControlApp",
+    "type": "application",
+    "i18n": {
+      "bundleUrl": "i18n/i18n.properties",
+      "fallbackLocale": "en",
+      "supportedLocales": ["en", "de"],
+      "terminologies": {
+        "sports": {
+          "bundleUrl": "i18n/terminologies/sports/i18n.terminologies.sports.properties",
+          "bundleUrlRelativeTo": "manifest",
+          "supportedLocales": ["en", "de"]
+        },
+        "travel": {
+          "bundleUrl": "i18n/terminologies/travel/i18n.terminologies.travel.properties",
+          "bundleUrlRelativeTo": "manifest",
+          "supportedLocales": ["en", "de"]
+        }
+      }
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/backend/v2/sourcing/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      },
+      "adminService": {
+        "uri": "/backend/v2/admin/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "supportedThemes": ["sap_hcb", "sap_bluecrystal", "sap_fiori_3"]
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "com.sap.pgp.dev.SupplierControlApp.view.App",
+      "type": "XML",
+      "id": "app"
+    },
+    "resources": {
+      "css": [
+        {
+          "uri" : "css/customVBox.css"
+        }
+      ]
+    },
+    "dependencies": {
+      "minUI5Version": "1.30",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.tnt": {},
+        "sap.ui.layout": {},
+        "sap.uxap": {},
+        "sap.suite.ui.microchart": {
+          "lazy": true
+        }
+      }
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleUrl": "i18n/i18n.properties",
+          "async": true,
+          "fallbackLocale": "en",
+          "supportedLocales": ["en", "de"],
+          "terminologies": {
+            "sports": {
+              "bundleUrl": "i18n/terminologies/sports/i18n.terminologies.sports.properties",
+              "bundleUrlRelativeTo": "manifest",
+              "supportedLocales": ["en", "de"]
+            },
+            "travel": {
+              "bundleUrl": "i18n/terminologies/travel/i18n.terminologies.travel.properties",
+              "bundleUrlRelativeTo": "manifest",
+              "supportedLocales": ["en", "de"]
+            }
+          },
+          "enhanceWith": [
+            {
+              "bundleUrl": "reuse/appvar1/i18n/i18n.properties",
+              "fallbackLocale": "en",
+              "supportedLocales": ["en", "de"],
+              "terminologies": {
+                "sports": {
+                  "bundleUrl": "reuse/appvar1/i18n/terminologies/sports/i18n.terminologies.sports.properties",
+                  "bundleUrlRelativeTo": "manifest",
+                  "supportedLocales": ["en", "de"]
+                },
+                "travel": {
+                  "bundleUrl": "reuse/appvar1/i18n/terminologies/travel/i18n.terminologies.travel.properties",
+                  "bundleUrlRelativeTo": "manifest",
+                  "supportedLocales": ["en", "de"]
+                }
+              }
+            },
+            {
+              "bundleUrl": "reuse/appvar2/i18n/i18n.properties",
+              "bundleUrlRelativeTo": "manifest",
+              "supportedLocales": ["en", "de"],
+              "fallbackLocale": "en",
+              "terminologies": {
+                "travel": {
+                  "bundleUrl": "reuse/appvar2/i18n/terminologies/travel/i18n.terminologies.travel.properties",
+                  "bundleUrlRelativeTo": "manifest",
+                  "supportedLocales": ["en", "de"]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "side": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/sideContent.json"
+      },
+      "alerts": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/alerts.json"
+      },
+      "customer": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/customers.json"
+      },
+      "products": {
+        "type": "sap.ui.model.json.JSONModel"
+      },
+      "supplier": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/Suppliers.json"
+      },
+      "SToutModel": {
+        "type": "sap.ui.model.json.JSONModel"
+      },
+      "SupplierMo": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": true,
+          "metadataUrlParams": {
+            "sap-value-list": "none"
+          }
+        }
+      },
+      "AdminMo": {
+        "dataSource": "adminService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": true,
+          "metadataUrlParams": {
+            "sap-value-list": "none"
+          }
+        }
+      },
+      "location": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/Location.json"
+      },
+      "CategoryAgg": {
+        "type": "sap.ui.model.json.JSONModel"
+      },
+      "classification": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/Classification.json"
+      },
+      "status": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/Status.json"
+      },
+      "CategoryDesc": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/CategoryDesc.json"
+      },
+      "process": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/data/ProcessFlowData.json"
+      },
+      "business": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/data/BusinessData.json"
+      },
+      "suppliers": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/data/Suppliers.json"
+      },
+      "reviews": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/data/Reviews.json"
+      },
+      "news": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/data/News.json"
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlId": "mainContents",
+        "viewType": "XML",
+        "controlAggregation": "pages",
+        "viewPath": "com.sap.pgp.dev.SupplierControlApp.view"
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "home",
+          "target": "home"
+        },
+        {
+          "pattern": "MasterSettings",
+          "name": "masterSettings",
+          "target": ["detailSettings", "masterSettings"]
+        },
+        {
+          "pattern": "MasterSettings/SystemSettings",
+          "name": "systemSettings",
+          "target": ["detailSettings", "masterSettings"]
+        },
+        {
+          "pattern": "MasterSettings/fileSettings",
+          "name": "fileSettings",
+          "target": ["fileSettings", "masterSettings"]
+        },
+        {
+          "pattern": "MasterSettings/fileExportSettings",
+          "name": "fileExportSettings",
+          "target": ["fileExportSettings", "masterSettings"]
+        },
+        {
+          "pattern": "MasterSettings/LogServiceSettings",
+          "name": "LogServiceSettings",
+          "target": ["LogServiceSettings", "masterSettings"]
+        },
+        {
+          "pattern": "Statistics",
+          "name": "Statistics",
+          "target": "Statistics"
+        },
+        {
+          "pattern": "ImportantLinks",
+          "name": "importantLinks",
+          "target": "importantLinks"
+        },
+        {
+          "pattern": "Legal",
+          "name": "legal",
+          "target": "legal"
+        },
+        {
+          "pattern": "EventLog",
+          "name": "EventLog",
+          "target": "EventLog"
+        },
+        {
+          "pattern": "ValidationCC",
+          "name": "ValidationCC",
+          "target": "ValidationCC"
+        },
+        {
+          "pattern": "SuctExtInfo",
+          "name": "SuctExtInfo",
+          "target": "SuctExtInfo"
+        },
+        {
+          "pattern": "SiteControlParams",
+          "name": "SiteControlParams",
+          "target": "SiteControlParams"
+        },
+        {
+          "pattern": "RegionMap",
+          "name": "RegionMap",
+          "target": "RegionMap"
+        },
+        {
+          "pattern": "CategoryMap",
+          "name": "CategoryMap",
+          "target": "CategoryMap"
+        },
+        {
+          "pattern": "Suppliers",
+          "name": "Suppliers",
+          "target": "Suppliers"
+        },
+        {
+          "pattern": "SupplierMap",
+          "name": "SupplierMap",
+          "target": "SupplierMap"
+        },
+        {
+          "pattern": "CreateSupplier",
+          "name": "CreateSupplier",
+          "target": "CreateSupplier"
+        },
+        {
+          "pattern": "CreateSupplierUser",
+          "name": "CreateSupplierUser",
+          "target": "CreateSupplierUser"
+        },
+        {
+          "pattern": "Categories2RegionMap",
+          "name": "Categories2RegionMap",
+          "target": "Categories2RegionMap"
+        },
+        {
+          "pattern": "Categories2SupplierMap",
+          "name": "Categories2SupplierMap",
+          "target": "Categories2SupplierMap"
+        },
+        {
+          "pattern": "MaterialGroup2CommodityMap",
+          "name": "MaterialGroup2CommodityMap",
+          "target": "MaterialGroup2CommodityMap"
+        },
+        {
+          "pattern": "Plant2ShipToAddressMap",
+          "name": "Plant2ShipToAddressMap",
+          "target": "Plant2ShipToAddressMap"
+        },
+        {
+          "pattern": "SupplierRequest",
+          "name": "SupplierRequest",
+          "target": "SupplierRequest"
+        },
+        {
+          "pattern": "EventCockpit",
+          "name": "EventCockpit",
+          "target": "EventCockpit"
+        },
+        {
+          "pattern": "SourcingCockpit/:objectId:",
+          "name": "SourcingCockpit",
+          "target": "SourcingCockpit"
+        },
+        {
+          "pattern": "TailSpendSupplierMap",
+          "name": "TailSpendSupplierMap",
+          "target": "TailSpendSupplierMap"
+        },
+        {
+          "pattern": "SupplierByCategory/:objectId:",
+          "name": "SupplierByCategory",
+          "target": "SupplierByCategory"
+        },
+        {
+          "pattern": "SupplierRequestList",
+          "name": "SupplierRequestList",
+          "target": "SupplierRequestList"
+        },
+       {
+          "pattern": "SupplierRequestDetails/{SRID}",
+          "name": "SupplierRequestDetails",
+          "target": "SupplierRequestDetails"
+        }
+      ],
+      "targets": {
+        "home": {
+          "viewId": "home",
+          "viewName": "Home"
+        },
+        "fileSettings": {
+          "viewId": "FileImport",
+          "viewName": "settings.FileImport",
+          "controlId": "appSettings",
+          "controlAggregation": "detailPages",
+          "parent": "appSettings"
+        },
+        "fileExportSettings": {
+          "viewId": "FileExport",
+          "viewName": "settings.FileExport",
+          "controlId": "appSettings",
+          "controlAggregation": "detailPages",
+          "parent": "appSettings"
+        },
+        "LogServiceSettings": {
+          "viewId": "LogServiceSettings",
+          "viewName": "settings.LogServiceSettings",
+          "controlId": "appSettings",
+          "controlAggregation": "detailPages",
+          "parent": "appSettings"
+        },
+        "Statistics": {
+          "viewId": "Statistics",
+          "viewName": "Statistics"
+        },
+        "importantLinks": {
+          "viewId": "importantLinks",
+          "viewName": "ImportantLinks"
+        },
+        "SiteControlParams": {
+          "viewId": "SiteControlParams",
+          "viewName": "SiteControlParams"
+        },
+        "ValidationCC": {
+          "viewId": "ValidationCC",
+          "viewName": "ValidationCC"
+        },
+        "SuctExtInfo": {
+          "viewId": "SuctExtInfo",
+          "viewName": "SuctExtInfo"
+        },
+        "RegionMap": {
+          "viewId": "RegionMap",
+          "viewName": "RegionMap"
+        },
+        "CategoryMap": {
+          "viewId": "CategoryMap",
+          "viewName": "CategoryMap"
+        },
+        "Suppliers": {
+          "viewId": "Suppliers",
+          "viewName": "Suppliers"
+        },
+        "SupplierMap": {
+          "viewId": "SupplierMap",
+          "viewName": "SupplierMap"
+        },
+        "CreateSupplier": {
+          "viewId": "CreateSupplier",
+          "viewName": "CreateSupplier"
+        },
+        "CreateSupplierUser": {
+          "viewId": "CreateSupplierUser",
+          "viewName": "CreateSupplierUser"
+        },
+        "Categories2RegionMap": {
+          "viewId": "Categories2RegionMap",
+          "viewName": "Categories2RegionMap"
+        },
+        "Categories2SupplierMap": {
+          "viewId": "Categories2SupplierMap",
+          "viewName": "Categories2SupplierMap"
+        },
+        "MaterialGroup2CommodityMap": {
+          "viewId": "MaterialGroup2CommodityMap",
+          "viewName": "MaterialGroup2CommodityMap"
+        },
+        "Plant2ShipToAddressMap": {
+          "viewId": "Plant2ShipToAddressMap",
+          "viewName": "Plant2ShipToAddressMap"
+        },        
+        "TailSpendSupplierMap": {
+          "viewId": "TailSpendSupplierMap",
+          "viewName": "TailSpendSupplierMap"
+        },
+        "AribaGBList": {
+          "viewId": "AribaGBList",
+          "viewName": "AribaGBList"
+        },
+        "SupplierRequest": {
+          "viewId": "SupplierRequest",
+          "viewName": "SupplierRequest"
+        },
+        "EventCockpit": {
+          "viewId": "EventCockpit",
+          "viewName": "EventCockpit"
+        },
+        "SourcingCockpit": {
+          "viewId": "SourcingCockpit",
+          "viewName": "SourcingCockpit"
+        },
+        "SourcingCockpitSupplier": {
+          "viewId": "SourcingCockpitSupplier",
+          "viewName": "SourcingCockpitSupplier"
+        },
+        "SourcingCockpitReview": {
+          "viewId": "SourcingCockpitReview",
+          "viewName": "SourcingCockpitReview"
+        },
+        "SupplierByCategory": {
+          "viewId": "SupplierByCategory",
+          "viewName": "SupplierByCategory"
+        },
+        "SupplierDetails": {
+          "viewName": "SupplierDetails",
+          "viewId": "SupplierDetails"
+        },
+        "SupplierDetailDetail": {
+          "viewName": "SupplierDetailDetail",
+          "viewId": "SupplierDetailDetail"
+        },
+        "EventLog": {
+          "viewName": "EventLog",
+          "viewId": "EventLog"
+        },
+        "SupplierRequestList": {
+          "viewId": "SupplierRequestList",
+          "viewName": "SupplierRequestList"
+        },
+        "SupplierRequestDetails": {
+          "viewId": "SupplierRequestDetails",
+          "viewName": "SupplierRequestDetails"
+        }
+      }
+    }
+  }
+}

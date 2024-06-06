@@ -1,0 +1,49 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog id="myDialog" noDataText="No Services Found" title="PR Services" search=".handlePRServiceSearch" items="{
+			path : 'PR_Service_object>/PR_Service'
+		}">
+		<columns>
+			<Column width="auto">
+				<header>
+					<Text text="Line" />
+				</header>
+			</Column>
+			<Column width="auto">
+				<header>
+					<Text text="Short Text" />
+				</header>
+			</Column>
+			<Column width="auto">
+				<header>
+					<Text text="Quantiy" />
+				</header>
+			</Column>
+			<Column width="auto">
+				<header>
+					<Text text="Product" />
+				</header>
+			</Column>
+			<Column width="auto">
+				<header>
+					<Text text="Gross Price" />
+				</header>
+			</Column>
+			<Column width="auto">
+				<header>
+					<Text text="Currency" />
+				</header>
+			</Column>
+		</columns>
+		<ColumnListItem vAlign="Middle">
+			<cells>
+				<ObjectIdentifier title="{PR_Service_object>SubpackageExtline}" />
+				<ObjectIdentifier title="{PR_Service_object>Subpackageshorttext}" />
+				<ObjectNumber number="{PR_Service_object>Subpackagequantiy}" />
+				<Text text="{PR_Service_object>Subpackageuom}" />
+				<Text text="{PR_Service_object>Subpackagegross}" />
+				<Text text="N/A" />
+			</cells>
+		</ColumnListItem>
+	</TableSelectDialog>
+</core:FragmentDefinition>

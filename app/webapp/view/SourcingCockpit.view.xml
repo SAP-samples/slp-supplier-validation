@@ -1,0 +1,105 @@
+<mvc:View displayBlock="true" controllerName="com.sap.pgp.dev.SupplierControlApp.controller.SourcingCockpit"
+	xmlns="sap.ui.table"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:m="sap.m"
+	xmlns:f="sap.f" height="100%">
+
+
+	<f:FlexibleColumnLayout layout="{SourcingCockpitView>/layout}">
+		<f:beginColumnPages>
+			<m:Page showHeader="false" enableScrolling="false" class="sapUiContentPadding">
+
+				<Table id="eventstable" rows="{SourcingCockpitModel>/data}" rowActionCount="" visibleRowCount="12" enableBusyIndicator="true" selectionMode="MultiToggle">
+					<extension>
+						<m:OverflowToolbar style="Clear">
+							<m:Title id="title" text="Sourcing Cockpit"/>
+							<m:ToolbarSpacer/>
+							<m:Button icon="sap-icon://activities" tooltip="proceed with RFQ event creation" text="Create RFQ" press="getSelectedIndices"/>
+							<m:Button icon="sap-icon://activities" tooltip="Create Purchase Order" text="Create PO" press=""/>
+							<m:Button icon="sap-icon://decline" tooltip="clear selection" press="clearSelection"/>
+						</m:OverflowToolbar>
+					</extension>
+					<columns>
+						<Column width="150px">
+							<m:Label text="PR ID"/>
+							<template>
+								<m:Text text="{SourcingCockpitModel>PRID}" wrapping="false"/>
+							</template>
+						</Column>
+						<Column width="100px">
+							<m:Label text="PR Item"/>
+							<template>
+								<m:Text text="{SourcingCockpitModel>PRITEM}" wrapping="false"/>
+							</template>
+						</Column>
+						<Column width="250px">
+							<m:Label text="PR Title"/>
+							<template>
+								<m:Text text="{SourcingCockpitModel>PRTitle}" wrapping="true"/>
+							</template>
+						</Column>
+						<Column width="250px">
+							<m:Label text="Item Description"/>
+							<template>
+								<m:Text text="{SourcingCockpitModel>ItemDesc}" wrapping="true"/>
+							</template>
+						</Column>
+						<Column width="150px">
+							<m:Label text="Created Date"/>
+							<template>
+								<m:Text text="{SourcingCockpitModel>CreatedDate}" wrapping="false"/>
+							</template>
+						</Column>
+
+						<Column width="150px">
+							<m:Label text="Item Category"/>
+							<template>
+								<m:VBox>
+									<m:Text id="text1" text="{= ${SourcingCockpitModel>CategoryID} === 'B' ? 'Material' :  ${SourcingCockpitModel>CategoryID}}" visible="{= ${SourcingCockpitModel>PackageNo} === 0 ? true : false}"/>
+
+									<m:Button text="View Services" class="sapUiTinyMarginTop sapUiTinyMarginBottom" app:mydata="{SourcingCockpitModel>PackageNo}" visible="{= ${SourcingCockpitModel>PackageNo} === 0 ? false : true}" press=".handleTableSelectDialogPress">
+										<m:customData>
+											<core:CustomData key="resizable" value="true" />
+											<core:CustomData key="draggable" value="true" />
+											<core:CustomData key="responsivePadding" value="true" />
+										</m:customData>
+									</m:Button>
+
+								</m:VBox>
+							</template>
+						</Column>
+						<Column width="150px">
+							<m:Label text="Quantity" width="100px"/>
+							<template>
+								<m:Text text="{SourcingCockpitModel>Quantity}" wrapping="false"/>
+							</template>
+						</Column>
+						<Column width="100px">
+							<m:Label text="UOM"/>
+							<template>
+								<m:Text text="{SourcingCockpitModel>UOM}" wrapping="false"/>
+							</template>
+						</Column>
+					</columns>
+
+					<rowActionTemplate>
+						<RowAction>
+							<items>
+								<RowActionItem type="Navigation" press="onDetailsPress" icon="sap-icon://feeder-arrow"></RowActionItem>
+							</items>
+						</RowAction>
+					</rowActionTemplate>
+				</Table>
+			</m:Page>
+		</f:beginColumnPages>
+
+		<f:midColumnPages>
+			<mvc:XMLView id="SourcingCockpitSupplier" viewName="com.sap.pgp.dev.SupplierControlApp.view.SourcingCockpitSupplier" />
+		</f:midColumnPages>
+		<f:endColumnPages>
+			<mvc:XMLView id="SourcingCockpitReview" viewName="com.sap.pgp.dev.SupplierControlApp.view.SourcingCockpitReview" />
+		</f:endColumnPages>
+	</f:FlexibleColumnLayout>
+</mvc:View>

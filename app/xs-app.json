@@ -1,0 +1,33 @@
+{
+  "welcomeFile": "/SupplierControlApp/index.html",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/sct/logout",
+    "logoutPage": "/logout.html"
+  },
+
+  "routes": [
+    {
+      "source": "^/backend/(.*)",
+      "target": "$1",
+      "authenticationType": "xsuaa",
+      "destination": "backend",
+      "csrfProtection": false
+    },
+
+    {
+      "source": "^/logout.html$",
+      "localDir": "resources",
+      "authenticationType": "none",
+      "cacheControl": "no-cache"
+    },
+
+    {
+      "source": "^/SupplierControlApp/(.*)$",
+      "target": "$1",
+      "localDir": "webapp",
+      "authenticationType": "xsuaa",
+      "cacheControl": "must-revalidate"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+<mvc:View xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable" 
+	controllerName="com.sap.pgp.dev.SupplierControlApp.controller.Suppliers" 
+	xmlns:m="sap.m" height="100%">
+	<Page showHeader="false">
+
+	<!-- use this to make the table occupy the available screen height -->
+	<VBox fitContainer="true">
+		<smartFilterBar:SmartFilterBar id="SuppliersFilterBar" smartVariant="true" entitySet="Suppliers" enableBasicSearch="true">
+			
+
+		</smartFilterBar:SmartFilterBar>
+
+		<smartTable:SmartTable id="SuppliersTable" entitySet="Suppliers" smartFilterId="SuppliersFilterBar" tableType="Table" useExportToExcel="true" useVariantManagement="false" useTablePersonalisation="true" header="Suppliers" showRowCount="true" enableAutoBinding="true" class="sapUiResponsiveContentPadding" initiallyVisibleFields="ACMID,SupplierID,SupplierName,PRTitle" requestAtLeastFields="Action">
+			<!-- layout data used to make the table growing but the filter bar fixed -->
+			<smartTable:customToolbar>
+			<OverflowToolbar design="Transparent">
+				<ToolbarSpacer/>
+			<m:MenuButton text="Download Sample files">
+				<m:menu>
+					<m:Menu itemSelected="onMenuAction">
+						<m:MenuItem text="Download Supplier Sample CSV" icon="sap-icon://download" press=".onDownloadFile" />
+						<m:MenuItem text="Download Supplier User Sample CSV" icon="sap-icon://download" press=".onDownloadFile" />
+					</m:Menu>
+				</m:menu>
+			</m:MenuButton>
+
+			<m:MenuButton text="Actions">
+				<m:menu>
+					<m:Menu itemSelected="onMenuAction">
+						<m:MenuItem text="Sync Suppliers from Ariba" icon="sap-icon://synchronize" press=".onSyncDataFromAriba" />
+						<m:MenuItem text="Sync Supplier Users from Ariba" icon="sap-icon://synchronize" press=".onSyncDataFromAriba" />
+					</m:Menu>
+				</m:menu>
+			</m:MenuButton>
+				</OverflowToolbar>
+				</smartTable:customToolbar>
+			<Table sticky="ColumnHeaders,HeaderToolbar"  autoPopinMode="true">
+                    <columns>
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "Action", "leadingProperty": "Action", "columnIndex": 4}'/>
+                            </customData>
+                            <Text text="Action" />
+                        </Column>
+                    </columns>
+					<items>
+                        <ColumnListItem>
+                            <Button press="doSupplierUserDetails" app:mydata="{ACMID}" icon="sap-icon://feeder-arrow" />
+                        </ColumnListItem>
+                    </items>
+                </Table>
+
+			<smartTable:layoutData>
+				<FlexItemData growFactor="1" baseSize="0%"/>
+			</smartTable:layoutData>
+		</smartTable:SmartTable>
+	</VBox>
+	</Page>
+
+</mvc:View>
+
+

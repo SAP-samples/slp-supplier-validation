@@ -1,0 +1,117 @@
+<!-- <mvc:View displayBlock="true" controllerName="com.sap.pgp.dev.SupplierControlApp.controller.Plant2ShipToAddressMap"
+	xmlns="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:unified="sap.ui.unified"
+	xmlns:core="sap.ui.core"
+	xmlns:commons="sap.suite.ui.commons"
+	xmlns:tnt="sap.tnt"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:m="sap.m" height="100%">
+
+	<m:Page showHeader="false" enableScrolling="false" class="sapUiContentPadding">
+		<m:FlexBox class="sapUiSmallMargin" justifyContent="End">
+			<m:MenuButton text="Actions">
+				<m:menu>
+					<m:Menu itemSelected="onMenuAction">
+						<m:MenuItem text="Download Plant2ShipToAddress Sample CSV" icon="sap-icon://download" press=".onDownloadFile" />
+						<m:MenuItem text="Import Plant2ShipToAddress" icon="sap-icon://upload" press=".onOpenPlant2ShipToAddressImportDialog" />
+					</m:Menu>
+				</m:menu>
+			</m:MenuButton>
+		</m:FlexBox>
+
+		<Table id="Plant2ShipToAddressTable" rows="{Plant2ShipToAddressData>/data}" selectionMode="None" visibleRowCount="12" rowActionCount="1">
+
+
+			<extension>
+				<m:OverflowToolbar>
+					<m:Title id="title" text="List of Plant and Ship Address Map"/>
+
+					<m:ToolbarSpacer/>
+					<m:SearchField search="handlePlant2ShipToAddressSearch" width="17.5rem"/>
+				</m:OverflowToolbar>
+			</extension>
+			<columns>
+				<Column width="auto">
+					<m:Label text="PlantID"/>
+					<template>
+						<m:Text text="{Plant2ShipToAddressData>PlantID}" wrapping="false"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Street"/>
+					<template>
+						<m:Text text="{Plant2ShipToAddressData>Street}" wrapping="false"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="City"/>
+					<template>
+						<m:Text text="{Plant2ShipToAddressData>City}" wrapping="false"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="State"/>
+					<template>
+						<m:Text text="{Plant2ShipToAddressData>State}" wrapping="false"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="PostalCode"/>
+					<template>
+						<m:Text text="{Plant2ShipToAddressData>PostalCode}" wrapping="false"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Country"/>
+					<template>
+						<m:Text text="{Plant2ShipToAddressData>Country}" wrapping="false"/>
+					</template>
+				</Column>
+			</columns>
+		</Table>
+
+		<m:VBox class="sapUiSmallMargin">
+
+		</m:VBox>
+
+	</m:Page>
+
+</mvc:View> -->
+
+<mvc:View xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable" 
+	controllerName="com.sap.pgp.dev.SupplierControlApp.controller.Plant2ShipToAddressMap" height="100%">
+	<Page showHeader="false">
+
+	<!-- use this to make the table occupy the available screen height -->
+	<VBox fitContainer="true">
+		<smartFilterBar:SmartFilterBar id="Plant2ShipToAddressFilterBar" smartVariant="true" entitySet="Plant2ShipToAddress" enableBasicSearch="true">
+		</smartFilterBar:SmartFilterBar>
+
+		<smartTable:SmartTable id="Plant2ShipToAddressTable" entitySet="Plant2ShipToAddress" smartFilterId="Plant2ShipToAddressFilterBar" tableType="Table" useExportToExcel="true" useVariantManagement="false" useTablePersonalisation="true" header="Plant and Ship Address" showRowCount="true" enableAutoBinding="true" class="sapUiResponsiveContentPadding" initiallyVisibleFields="PlantID,Street,City,State,PostalCode,Country">
+			<smartTable:customToolbar>
+			<OverflowToolbar design="Transparent">
+				<ToolbarSpacer/>
+				<MenuButton text="Actions" textDirection="Inherit">
+				<menu>
+					<Menu itemSelected="onMenuAction">
+						<MenuItem text="Download Plant2ShipToAddress Sample CSV" icon="sap-icon://download" press=".onDownloadFile" />
+						<MenuItem text="Import Plant2ShipToAddress" icon="sap-icon://upload" press=".onOpenPlant2ShipToAddressImportDialog" />
+					</Menu>
+				</menu>
+			</MenuButton>
+			</OverflowToolbar>			
+			</smartTable:customToolbar>
+
+			<smartTable:layoutData>
+				<FlexItemData growFactor="1" baseSize="0%"/>
+			</smartTable:layoutData>
+		</smartTable:SmartTable>
+	</VBox>
+	</Page>
+
+</mvc:View>

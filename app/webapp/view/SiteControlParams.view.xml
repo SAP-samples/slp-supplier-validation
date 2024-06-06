@@ -1,0 +1,42 @@
+<mvc:View controllerName="com.sap.pgp.dev.SupplierControlApp.controller.SiteControlParams"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core">
+	<Page showHeader="true" enableScrolling="false" class="sapUiContentPadding">
+		<customHeader>
+			<Bar>
+				<contentRight>
+					<Button id="save" text="Save" type="Emphasized" press="OnPressSave" />
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<VBox class="sapUiSmallMargin">
+			<f:SimpleForm id="SimpleFormDisplay354" editable="false" layout="ResponsiveGridLayout" title="Site Control Parameters" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+				<f:content>
+					<Label text="SLP Enabled?" />
+					<Switch id="DataLakeEnabled" state="{SiteControlParams>/DataLakeEnabled}">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Switch>
+
+					<Label labelFor="SourcingApplication" text="Sourcing Application" />
+					<Select id="SourcingApplication" forceSelection="false" selectedKey="{SiteControlParams>/SourcingApplication}" items="{
+							path:'SCPViews>/SourcingApplication',
+							sorter: { path: 'Name' }
+						}">
+						<core:ListItem key="{SCPViews>Name}" text="{SCPViews>Name}" />
+					</Select>
+
+					<Label text="Ariba Realm" />
+					<Input id="AribaRealm" value="{SiteControlParams>/AribaRealm}" width="200px" class="sapUiSmallMarginBottom" />
+
+			
+				</f:content>
+
+			</f:SimpleForm>
+		</VBox>
+	</Page>
+</mvc:View>

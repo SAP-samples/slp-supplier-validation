@@ -1,0 +1,77 @@
+<mvc:View displayBlock="true" controllerName="com.sap.pgp.dev.SupplierControlApp.controller.EventCockpit"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt"
+	xmlns:commons="sap.suite.ui.commons"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:smartTable="sap.ui.comp.smarttable" height="100%">
+
+	<Page showHeader="false" enableScrolling="false" class="sapUiContentPadding">
+
+
+		<smartFilterBar:SmartFilterBar id="idEventCockpitSF" smartVariant="true" entitySet="RFPEvent" enableBasicSearch="true">
+		</smartFilterBar:SmartFilterBar>
+
+		<smartTable:SmartTable id="idEventCockpitST" entitySet="RFPEvent" initiallyVisibleFields="DOCID,Title,webJumperURL,createDate,Status" requestAtLeastFields="Action" smartFilterId="idEventCockpitSF" tableType="Table" useExportToExcel="true" useVariantManagement="true" useTablePersonalisation="true" header="External Demand" showRowCount="true" enableAutoBinding="true" class="sapUiResponsiveContentPadding">
+			<Table sticky="ColumnHeaders,HeaderToolbar" autoPopinMode="true">
+				<columns>
+					<Column demandPopin="true">
+						<customData>
+							<core:CustomData key="p13nData" value='\{"columnKey": "DOCID", "leadingProperty": "DOCID", "columnIndex": 0}'/>
+						</customData>
+						<Text text="DOCID"></Text>
+					</Column>
+					<Column demandPopin="true">
+						<customData>
+							<core:CustomData key="p13nData" value='\{"columnKey": "Title", "leadingProperty": "Title", "columnIndex": 1}'/>
+						</customData>
+						<Text text="Title"></Text>
+					</Column>
+					<Column demandPopin="true">
+						<customData>
+							<core:CustomData key="p13nData" value='\{"columnKey": "webJumperURL", "leadingProperty": "webJumperURL", "columnIndex": 2}'/>
+						</customData>
+						<Text text="webJumperURL"></Text>
+					</Column>
+					<Column demandPopin="true">
+						<customData>
+							<core:CustomData key="p13nData" value='\{"columnKey": "createDate", "leadingProperty": "createDate", "columnIndex": 3}'/>
+						</customData>
+						<Text text="createDate"></Text>
+					</Column>
+
+					<Column demandPopin="true">
+						<customData>
+							<core:CustomData key="p13nData" value='\{"columnKey": "Status", "leadingProperty": "Status", "columnIndex": 4}'/>
+						</customData>
+						<Text text="Status"></Text>
+					</Column>
+
+					<Column demandPopin="true">
+						<customData>
+							<core:CustomData key="p13nData" value='\{"columnKey": "Action", "leadingProperty": "Action", "columnIndex": 5}'/>
+						</customData>
+						<Text text="RFP Item Details" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<Text text="{DOCID}"></Text>
+						<Text text="{Title}"></Text>
+						<Link text="Ariba Sourcing Web Jumper" href="{webJumperURL}" target="_blank" />
+						<Text text="{createDate}"></Text>
+						<tnt:InfoLabel text="{Status}" colorScheme="6"/>
+						<Button press="onDetailsPress" icon="sap-icon://feeder-arrow" />
+					</ColumnListItem>
+				</items>
+			</Table>
+			<smartTable:layoutData>
+				<FlexItemData growFactor="1" baseSize="0%"/>
+			</smartTable:layoutData>
+		</smartTable:SmartTable>
+
+	</Page>
+
+</mvc:View>

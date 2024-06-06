@@ -1,0 +1,60 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		id="myDialog"
+		noDataText="No Users Found"
+		title="Supplier Organisation Users"
+		search=".handleSupplierUsersSearch"
+		items="{
+			path : 'SupplierUser_object>/SupplierUser'
+		}">
+		<ColumnListItem vAlign="Middle">
+			<cells>
+				<ObjectIdentifier title="{SupplierUser_object>ExternalOrganizationID}" />
+				<Text text="{SupplierUser_object>FullName}" />
+				<Text text="{SupplierUser_object>EmailAddress}" />
+				<Text text="{SupplierUser_object>Phone}" />
+				<Text text="{SupplierUser_object>LoginID}" />
+				<ObjectNumber
+					number="{SupplierUser_object>IsUserApproved}"
+					unit="{WeightUnit}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column width="12em">
+				<header>
+					<Text text="ExternalOrganizationID" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<header>
+					<Text text="FullName" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true">
+				<header>
+					<Text text="EmailAddress" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true">
+				<header>
+					<Text text="Phone" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true">
+				<header>
+					<Text text="LoginID" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Desktop"
+				demandPopin="true"
+				hAlign="End">
+				<header>
+					<Text text="IsUserApproved" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

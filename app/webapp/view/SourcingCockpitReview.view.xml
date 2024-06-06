@@ -1,0 +1,72 @@
+<mvc:View displayBlock="true" controllerName="com.sap.pgp.dev.SupplierControlApp.controller.SourcingCockpitReview" height="100%"
+    xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form">
+
+    <ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <expandedHeading>
+                    <m:Title text="Review For RFQ Creation" wrapping="true"/>
+                </expandedHeading>
+
+                <actions>
+                    <m:Button icon="sap-icon://create" id="createEvent" text="Create RFQ Event" tooltip="Click to create RFQ for selected PR" press="createManualRFQEvent" enabled="true"/>
+                    <m:Button icon="sap-icon://decline" tooltip="close review section" press="clearSelection"/>
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <sections>
+            <ObjectPageSection title="Purchase Requisitions">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <m:List id="list" items="{EventCreationPayload>/SelectedPRs}">
+                            <m:items>
+                                <m:ObjectListItem title="{EventCreationPayload>PRTitle}" number="{
+                                parts:[{path:'EventCreationPayload>ExtendedPrice'},{path:'EventCreationPayload>Currency'}],
+                                type: 'sap.ui.model.type.Currency',
+                                formatOptions: {showMeasure: false}
+                            }" numberUnit="{EventCreationPayload>Currency}">
+                                    <m:attributes>
+                                        <m:ObjectAttribute title="Description" text="{EventCreationPayload>ItemDesc}" />
+                                        <m:ObjectAttribute title="Material Group ID" text="{EventCreationPayload>ItemCategory}" />
+                                        <m:ObjectAttribute title="Material Code" text="{EventCreationPayload>MaterialCode}" />
+                                        <m:ObjectAttribute title="PRID" text="{EventCreationPayload>PRID}" />
+                                        <m:ObjectAttribute title="PRITEM" text="{EventCreationPayload>PRITEM}" />
+                                        <m:ObjectAttribute title="Quantity" text="{EventCreationPayload>Quantity}" />
+                                        <m:ObjectAttribute title="UnitPrice" text="{EventCreationPayload>UnitPrice}" />
+                                    </m:attributes>
+                                </m:ObjectListItem>
+                            </m:items>
+                        </m:List>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+        <sections>
+            <ObjectPageSection title="Assigned Suppliers">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <m:List id="SuppliersList" items="{EventCreationPayload>/SelectedSuppliers}">
+                            <m:items>
+
+                                <m:CustomListItem>
+                                    <m:HBox alignItems="Center">
+                                        <m:ObjectListItem title="{EventCreationPayload>SupplierName}" number="{EventCreationPayload>ACMID}"/>
+                                        <m:Button text="X" app:ACMID="{EventCreationPayload>ACMID}" press=".assignSupplierRemove"  type="Reject" />
+                                    </m:HBox>
+                                </m:CustomListItem>
+                            </m:items>
+
+                        </m:List>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</mvc:View>

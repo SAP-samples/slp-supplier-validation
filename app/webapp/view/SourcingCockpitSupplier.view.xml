@@ -1,0 +1,115 @@
+<mvc:View displayBlock="true" controllerName="com.sap.pgp.dev.SupplierControlApp.controller.SourcingCockpitSupplier" height="100%"
+	xmlns="sap.uxap"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:m="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+	xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:tnt="sap.tnt">
+
+	<ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+				<expandedHeading>
+					<m:Title text="Assign Suppliers for RFQ Creation" wrapping="true"/>
+				</expandedHeading>
+				<actions>
+					<m:Button icon="sap-icon://survey" id="moveForReview" text="Review RFQ Creation" tooltip="Click and Review the PR before creating the RFQ Event" press="reviewRFQCreation" enabled="true"/>
+					<m:Button icon="sap-icon://decline" tooltip="close Supplier Selection" press="clearSelection"/>
+				</actions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+
+		<sections>
+			<ObjectPageSection title="Preferred Suppliers">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<m:FlexBox direction="Column" alignItems="Start">
+								<tnt:InfoLabel visible="{= ${SourcingCockpitSupplierModal>/supplierByCommodityError} === '' ? false : true}" id="il2" width="100%" text="{SourcingCockpitSupplierModal>/supplierByCommodityError}" colorScheme="2"/>
+
+								<t:Table id="SupplierByPRCommodityTable" rows="{SourcingCockpitSupplierModal>/supplierByCommodity}" rowActionCount="" visibleRowCount="5" enableBusyIndicator="true" selectionMode="MultiToggle">
+									<t:extension>
+										<m:OverflowToolbar style="Clear">
+											<m:Title id="title" text="Preferred Suppliers"/>
+										</m:OverflowToolbar>
+									</t:extension>
+
+									<t:columns>
+										<t:Column width="auto">
+											<m:Label text="ACM ID"/>
+											<t:template>
+												<m:Text text="{SourcingCockpitSupplierModal>ACMID}" wrapping="false"/>
+											</t:template>
+										</t:Column>
+										<t:Column width="auto">
+											<m:Label text="ERP Supplier ID"/>
+											<t:template>
+												<m:Text text="{SourcingCockpitSupplierModal>SupplierID}" wrapping="false"/>
+											</t:template>
+										</t:Column>
+										<t:Column width="auto">
+											<m:Label text="Supplier Name"/>
+											<t:template>
+												<m:Text text="{SourcingCockpitSupplierModal>SupplierName}" wrapping="true"/>
+											</t:template>
+										</t:Column>
+										<t:Column width="auto">
+											<m:Label text="Supplier Country"/>
+											<t:template>
+												<m:Text text="{SourcingCockpitSupplierModal>SupplierCountry}" wrapping="true"/>
+											</t:template>
+										</t:Column>
+									</t:columns>
+								</t:Table>
+							</m:FlexBox>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+
+		<sections>
+			<ObjectPageSection title="Manual Supplier Assignment">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<m:FlexBox direction="Column" alignItems="Start">
+								<m:Label text="Select Suppliers from following dropdown"></m:Label>
+								<!-- <m:MultiComboBox id="manualSupplierSelectBox" selectionChange="handleSelectionChange" selectionFinish="handleSelectionFinish" width="350px" items="{
+									path: 'SourcingCockpitSupplierModal>/allSuppliers',
+									sorter: { path: 'SupplierName' }
+								}">
+									<core:Item key="{SourcingCockpitSupplierModal>ACMID}" text="{SourcingCockpitSupplierModal>SupplierName}"/>
+								</m:MultiComboBox> -->
+
+								<m:MultiInput
+								id="manualSupplierSelectBox"
+								showValueHelp="true"
+								valueHelpOnly="true"
+							    type="Text"
+								valueHelpRequest="onValueHelpRequest"
+								value="{SourcingCockpitSupplierModal>SupplierName}"
+								width="350px"
+							/>
+							</m:FlexBox>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+
+		<sections>
+			<ObjectPageSection title="Suppliers suggested by AI">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<m:Text text="Coming Soon"/>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
+</mvc:View>
