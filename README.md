@@ -1,4 +1,4 @@
-[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/liteinventorymanagement)](https://api.reuse.software/info/github.com/SAP-samples/liteinventorymanagement)
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/slp-supplier-validation)](https://api.reuse.software/info/github.com/SAP-samples/slp-supplier-validation)
 
 # Welcome to SLP Supplier Validation
 Welcome to the sample use case of the Supplier Validation application. This open source application developed using the Cloud Application Programming Model (CAP) will help as reference for customers developing solution to validate Supplier Registration data in Ariba Supplier Lifecycle management with external thirdparty providers like IRS for Tax Identification validation, OFAC check, Address Validation etc.
