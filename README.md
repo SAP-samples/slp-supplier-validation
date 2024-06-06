@@ -20,6 +20,7 @@ Some of the key capabilities of SLP Validation Application includes
 3. External Correlation ID maintance 
 4. Supplier List from Ariba
 5. Supplier Request Overview
+Please note this sample application does not provide any service handlers to integrate to thirdparty applications. Customers have to develop the integration using their preferred provider and API provided. 
 
 Sample View of SLP Supplier Validation
 
